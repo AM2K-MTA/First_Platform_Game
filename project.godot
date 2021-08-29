@@ -9,10 +9,30 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "InteractableItem",
+"class": "ConsumableItem",
+"language": "GDScript",
+"path": "res://Particles_playground/Temp_to_refactory/ConsumableItem.gd"
+}, {
 "base": "Area2D",
 "class": "Hitbox",
 "language": "GDScript",
 "path": "res://Scripts/Hitbox.gd"
+}, {
+"base": "Node",
+"class": "InteractableItem",
+"language": "GDScript",
+"path": "res://Particles_playground/Temp_to_refactory/InteractableItem.gd"
+}, {
+"base": "Control",
+"class": "InteractionComponentUI",
+"language": "GDScript",
+"path": "res://Particles_playground/Temp_to_refactory/InteractionComponentUI.gd"
+}, {
+"base": "StaticBody2D",
+"class": "LockedDoor",
+"language": "GDScript",
+"path": "res://Particles_playground/Temp_to_refactory/LockedDoor_zeldaLike.gd"
 }, {
 "base": "Node2D",
 "class": "MovingPlatform",
@@ -24,15 +44,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/MovingPlatform_v2.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Scripts/Player_mult_FSM.gd"
+}, {
 "base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://Scripts/StateMachine.gd"
 } ]
 _global_script_class_icons={
+"ConsumableItem": "",
 "Hitbox": "",
+"InteractableItem": "",
+"InteractionComponentUI": "",
+"LockedDoor": "",
 "MovingPlatform": "",
 "MovingPlatform3": "",
+"Player": "",
 "StateMachine": ""
 }
 

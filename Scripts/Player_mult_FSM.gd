@@ -1,3 +1,4 @@
+class_name Player
 extends KinematicBody2D
 
 # The "cenaryObj19" is on y position = 478 is reached by player's jump, but on y position = 477, player doesn't reached (alcança)
@@ -12,12 +13,12 @@ signal grounded_updated(is_grounded)
 const RockProjectile_PS = preload("res://Scenes/Hand_FistProjectile.tscn")
 
 const UP = Vector2(0, -1)
-const SLOP_STOP = 64		# what is that for ??!
+const SLOP_STOP = 64		# original code is 64 what is that for ??!
 const DROP_THRU_BIT = 2
 const DROP_THRU_BIT_7 = 7
 
 var velocity = Vector2()	# max_vel = 479.7 ou 479.7 (left and right side change just the negative sign to the left, left_max_vel = -479.5)
-var move_speed = 5 * Globals.UNIT_SIZE		# = 5 * Globals.UNIT_SIZE or = 5 * 35
+var move_speed = 5.25 * 32		# = 5 * Globals.UNIT_SIZE or = 5 * 35
 var gravity
 var max_jump_velocity
 var min_jump_velocity
@@ -30,8 +31,9 @@ var is_grounded = false
 var throwing_rock = false
 var end_throw_anim_bool = false
 
-var max_jump_height = 2.25 * 50		# = 2.25 * Globals.UNIT_SIZE (UNIT_SIZE = 96)
-var min_jump_height = 0.8 * 50	# = 0.8 * Globals.UNIT_SIZE
+# max-jump = 2.25 * 50 = 112.5		3.25 * 32 = 104
+var max_jump_height = 3.25 * Globals.UNIT_SIZE		# = 2.25 * Globals.UNIT_SIZE (UNIT_SIZE = 96)... But I put (2.25 * 50)
+var min_jump_height = 0.8 * Globals.UNIT_SIZE		# = 0.8 * Globals.UNIT_SIZE... But I put (0.8 * 50)
 var jump_duration = 0.5		# = 0.5		(0.8 fica quase uma queda com para-quedas)
 
 onready var raycasts = $Raycasts	# Do I need this here ??!

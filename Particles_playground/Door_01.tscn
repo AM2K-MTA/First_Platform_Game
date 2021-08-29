@@ -19,9 +19,6 @@ shape = SubResource( 1 )
 
 [node name="Particles" parent="." instance=ExtResource( 2 )]
 
-[node name="Background" parent="Particles" index="0"]
-visible = false
-
 [connection signal="body_entered" from="." to="." method="_on_Door_01_body_entered"]
 
 [editable path="Particles"]
