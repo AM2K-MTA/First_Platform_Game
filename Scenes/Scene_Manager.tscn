@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Player_mult_FSM.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Particles_playground/Level_01.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Scene_Manager.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "FadeToBlack"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "finished_fading"
+} ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "FadeToNormal"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.215686, 0.992157, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[node name="Scene_Manager" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Current_Scene" type="Node" parent="."]
+
+[node name="Level_01" parent="Current_Scene" instance=ExtResource( 2 )]
+
+[node name="Player_mult_FSM" parent="." instance=ExtResource( 1 )]
+position = Vector2( 45, 240 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="ScreenTransition" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="ScreenTransition"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenTransition"]
+anims/FadeToBlack = SubResource( 1 )
+anims/FadeToNormal = SubResource( 2 )

@@ -1,5 +1,5 @@
 extends StaticBody2D
-class_name LockedDoor
+#class_name LockedDoor
 
 export(String, FILE) var LD_next_scene_path = ""
 #export(bool) var LD_is_invisible = false

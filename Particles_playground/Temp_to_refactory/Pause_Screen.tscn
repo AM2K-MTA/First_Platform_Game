@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Particles_playground/Temp_to_refactory/Pause_Screen.gd" type="Script" id=1]
+
+[node name="Pause_Screen" type="CanvasLayer"]
+
+[node name="Pause" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BlackOverlay" type="ColorRect" parent="Pause"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.890196 )
+
+[node name="Continue_button" type="Button" parent="Pause"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -34.5
+margin_top = -10.0
+margin_right = 34.5
+margin_bottom = 10.0
+text = "Continue"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FullScreen_button" type="Button" parent="Pause"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -38.4663
+margin_top = -40.3345
+margin_right = 39.5337
+margin_bottom = -20.3345
+text = "FullScreen"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

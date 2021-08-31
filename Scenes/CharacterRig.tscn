@@ -1328,7 +1328,7 @@ tracks/15/keys = {
 "values": [ false, false ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=9]
 resource_name = "throw"
 length = 0.4
 tracks/0/type = "value"
@@ -1665,7 +1665,7 @@ tracks/13/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=11]
 resource_name = "throw_running"
 length = 0.4
 tracks/0/type = "value"
@@ -1836,7 +1836,7 @@ region_enabled = true
 region_rect = Rect2( 20, 105, 50, 50 )
 
 [node name="Head" type="Sprite" parent="Torso"]
-position = Vector2( -0.35356, -14.2843 )
+position = Vector2( -1.35356, -15.2843 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 14, -1, 60, 90 )
@@ -1856,8 +1856,8 @@ region_enabled = true
 region_rect = Rect2( 86, 124, 40, 39 )
 
 [node name="RightArm" type="Sprite" parent="Torso"]
-position = Vector2( -5.94975, -5.32411 )
-rotation = 6.00879
+position = Vector2( -6.94975, -8.32411 )
+rotation = -0.367357
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 90, 81, 30, 45 )
@@ -1869,8 +1869,8 @@ rotation = -1.85319
 
 [node name="LeftArm" type="Sprite" parent="Torso"]
 show_behind_parent = true
-position = Vector2( 2.42282, -5.14213 )
-rotation = -1.27584
+position = Vector2( 6.42282, -5.14213 )
+rotation = -0.861739
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 90, 81, 30, 45 )
@@ -1884,6 +1884,6 @@ anims/idle = SubResource( 5 )
 anims/jump = SubResource( 6 )
 anims/jump2 = SubResource( 7 )
 anims/run = SubResource( 8 )
-anims/throw = SubResource( 13 )
+anims/throw = SubResource( 9 )
 anims/throw_Donuts = SubResource( 10 )
-anims/throw_running = SubResource( 12 )
+anims/throw_running = SubResource( 11 )

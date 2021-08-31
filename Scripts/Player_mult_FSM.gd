@@ -18,7 +18,7 @@ const DROP_THRU_BIT = 2
 const DROP_THRU_BIT_7 = 7
 
 var velocity = Vector2()	# max_vel = 479.7 ou 479.7 (left and right side change just the negative sign to the left, left_max_vel = -479.5)
-var move_speed = 5.25 * 32		# = 5 * Globals.UNIT_SIZE or = 5 * 35
+var move_speed = 5.25 * Globals.UNIT_SIZE		# = 5 * Globals.UNIT_SIZE or = 5 * 32
 var gravity
 var max_jump_velocity
 var min_jump_velocity
@@ -100,6 +100,7 @@ func _handle_move_input():
 		#print("_handle_move_input() was called!, " + String(countNum))
 		# Get movement KeyPresses, converts to integers, and then store in move_direction.
 		var move_direction = -int(Input.is_action_pressed("ui_left")) + int(Input.is_action_pressed("ui_right"))
+		
 		# Lerp velocity.x towards the direction the player is pressing keys for, weighted based on if they're grounded or not.
 		velocity.x = lerp(velocity.x, move_speed * move_direction, _get_h_weight())
 		#print("velocity.x: " + String(velocity.x))
@@ -112,6 +113,12 @@ func _handle_move_input():
 			#print("_handle_move_input() was called!, " + String(countNum))
 			# mod (DirectionInput_rayCast) next 6 lines
 			facing = move_direction
+			var raycast_look_door = $RayCast_Look_Door
+			raycast_look_door.cast_to = Vector2(50 * facing, 0)
+			raycast_look_door.force_raycast_update()
+			if (raycast_look_door.is_colliding()):
+				print(String(raycast_look_door.get_collider().name) + " is in front of me")
+			
 			var inputDir_cast = $DirectionInput_rayCast
 			inputDir_cast.cast_to = Vector2(50 * facing, 0)
 			inputDir_cast.force_raycast_update()
@@ -163,6 +170,13 @@ func print_state_onScreem():
 
 	#print("core_SM.state: " + String(coreState))
 	#print("action_SM.state: " + String(actionState))
+
+func set_spawn(location: Vector2, direction: int):
+	#anim_tree.set("parameters/Idle/blend_position", direction)
+	$Body.scale.x = direction
+	#print(direction)
+	position = location
+	#set_position(location)
 
 func _get_h_weight():
 	return 0.2 if is_grounded else 0.1		# What is that for (if chenge the value 0.1 to "else 2.5"), something realy creazy happens, WTF ??!
