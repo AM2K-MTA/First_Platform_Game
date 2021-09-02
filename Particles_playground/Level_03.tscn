@@ -80,5 +80,5 @@ is_locked = true
 [node name="Skull_Portal3" parent="." instance=ExtResource( 6 )]
 position = Vector2( 2130, 327 )
 next_scene_path = "res://Particles_playground/Level_02.tscn"
-spawn_location = Vector2( 1700, 600 )
+spawn_location = Vector2( 1700, 692 )
 is_locked = true

@@ -1,6 +1,8 @@
 extends "res://Scripts/StateMachine.gd"
 
 func _ready():
+	# Sometimes like when player change scene, some state like between paused and idle (like I did on "Scene_Manager", I did "coreFSM.set_physics_process(false) until player spawn on the new scene, them I chenge to true again and player can move")
+	# continue... this state like --> add_state("sleep") <-- (not controlable or "set_physics_process(false)"), this could fix the bug mencioned before and the bug that player can throw "Donut" and other guns when physics process is unnabled
 	add_state("idle")
 	add_state("run")
 	add_state("jump")
@@ -12,6 +14,7 @@ func _ready():
 		parent = find_parent("Player_mult_FSM")
 
 func _input(event):
+	#print("on core_FSM, _input(event), event/input is called: " + String(event.as_text()))		# get name of the Input event (Key, Mouse button and other devices input)
 	# create a array of values U like to check, then check if the array contain the values that U want
 	if [states.idle, states.run].has(state):
 		# jump

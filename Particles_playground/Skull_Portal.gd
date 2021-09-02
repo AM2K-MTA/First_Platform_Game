@@ -20,7 +20,9 @@ func _process(delta):
 	if (Input.is_action_just_pressed("ui_select")):
 		is_locked = !is_locked
 		emit_signal("from_parent_to_particle_should_emitting_signal", !is_locked)
-		print("Input here on Skull_Portal, is_locked: " + String(is_locked))
+		#print("Input here on Skull_Portal, is_locked: " + String(is_locked))
+		#var player = get_tree().current_scene.get_node("Player_mult_FSM")
+		#print(player.position)
 	# // }
 #	pass
 
@@ -33,5 +35,5 @@ func _on_Skull_Portal_body_entered(body):
 		else:
 			var scene_manager = get_tree().current_scene
 			scene_manager.transition_to_scene(next_scene_path, spawn_location, spawn_direction)
-			print("on Skull_Portal, func body_entered(), next_scene_path: " + String(next_scene_path))
+			#print("on Skull_Portal, func body_entered(), next_scene_path: " + String(next_scene_path))
 

@@ -8,6 +8,8 @@ var player_direction : int = 1
 enum TransitionType { NEW_SCENE, PARTY_SCREEN, MENU_ONLY }
 var transition_type = TransitionType.NEW_SCENE
 
+onready var player = get_node("Player_mult_FSM")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("Scene_Manager is ready!!")
@@ -28,16 +30,23 @@ func transition_to_scene(new_scene: String, spawn_location: Vector2, spawn_direc
 	player_direction = spawn_direction
 	transition_type = TransitionType.NEW_SCENE
 	$ScreenTransition/AnimationPlayer.play("FadeToBlack")
+	
+	if (player == null or player.name != "Player_mult_FSM"):
+		player = get_node("Player_mult_FSM")
+	
+	var coreFSM = player.find_node("Core_SM_PlayerFSM")
+	#print(coreFSM.name)
+	#print(coreFSM.is_physics_processing())
+	coreFSM.set_physics_process(false)
+	# When player collide with portal, if his state is "states.run, states.fall" entre outros, he will freeze in that state and go to a new scene like that, so that reset to "states.idle"
+	coreFSM.state = coreFSM.states.idle
 
 func finished_fading():
 	match transition_type:
 		TransitionType.NEW_SCENE:
-			print("on Scene_Manager, func finishing_fading(), called after anim FadeToBlack was finished")
-			#print(player_location)
+			#print("on Scene_Manager, func finishing_fading(), called after anim FadeToBlack was finished")
 			$Current_Scene.get_child(0).queue_free()
 			$Current_Scene.add_child(load(next_scene).instance())
-			
-			var player = get_node("Player_mult_FSM")
 			player.set_spawn(player_location, player_direction)
 			#print(player_location)
 		TransitionType.PARTY_SCREEN:
@@ -48,3 +57,18 @@ func finished_fading():
 			pass
 
 	$ScreenTransition/AnimationPlayer.play("FadeToNormal")
+
+func finished_fading_normal():
+	var coreFSM = player.find_node("Core_SM_PlayerFSM")
+	
+	if (coreFSM == null or coreFSM.name != "Core_SM_PlayerFSM"):
+		#print("on Scene_Manager, player = null OR It's name is =! them real name")
+		player = get_node("Player_mult_FSM")
+		coreFSM = player.find_node("Core_SM_PlayerFSM")
+		coreFSM.set_physics_process(true)
+	else:
+		if (!player.is_grounded):
+			print("on Scene_Manager, player is not grounded!!!")
+			# if player is NOT grounded (in the air for example), he'll give a jump in the air, that make him enter on "states.fall" and fix that
+			coreFSM.state = coreFSM.states.fall
+		coreFSM.set_physics_process(true)
