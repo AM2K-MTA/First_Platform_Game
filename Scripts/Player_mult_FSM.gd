@@ -33,7 +33,7 @@ var end_throw_anim_bool = false
 
 # max-jump = 2.25 * 50 = 112.5		3.25 * 32 = 104
 var max_jump_height = 3.25 * Globals.UNIT_SIZE		# = 2.25 * Globals.UNIT_SIZE (UNIT_SIZE = 96)... But I put (2.25 * 50)
-var min_jump_height = 0.8 * Globals.UNIT_SIZE		# = 0.8 * Globals.UNIT_SIZE... But I put (0.8 * 50)
+var min_jump_height = 0.8 * Globals.UNIT_SIZE		# = 0.8 * Globals.UNIT_SIZE... But I put (0.8 * 32)
 var jump_duration = 0.5		# = 0.5		(0.8 fica quase uma queda com para-quedas)
 
 onready var raycasts = $Raycasts	# Do I need this here ??!
@@ -76,7 +76,8 @@ func _apply_gravity(delta):
 	#print("on player, func _apply_gravity(delta)...")		# It's called on infinite loop
 	# apply gravity.
 	velocity.y += gravity * delta
-	
+
+# link to Game Endeavor on exemplo of "_apply_movement()" atualized, link: https://youtu.be/eQeFE8LMjxA?t=96
 func _apply_movement():
 	#print("on player, func _apply_movement() was called!")		# It's called on infinite loop
 	# set is_jumping to false if player is jumping and moving downward.
@@ -89,6 +90,14 @@ func _apply_movement():
 	is_grounded = !is_jumping && get_collision_mask_bit(DROP_THRU_BIT) && _check_is_grounded()
 	
 	_check_is_grounded2(drop_thru_raycasts)		# Check if player is colliding with a "Drop_Thru" layer, and fix a player's bug (more detail on func "_check_is_collided2()"
+	
+	# made on tutorial "create a FallingPlatform_GE from Game Endeavor"
+	for i in get_slide_count():
+		#print("on player's func _apply_movement(), for loop check method get_slide_count()")
+		var collision = get_slide_collision(i)
+		if (collision.collider.has_method("collide_with")):		# prevent errors
+			#print("on player's func _apply_movement(), check if collider has a specific method")
+			collision.collider.collide_with(collision, self)
 
 func _handle_move_input():
 	if (Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")):
