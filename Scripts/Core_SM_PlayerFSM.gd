@@ -18,6 +18,8 @@ func _input(event):
 	# create a array of values U like to check, then check if the array contain the values that U want
 	if [states.idle, states.run].has(state):
 		# jump
+		# Need to ref (refactory) this peace of code below (turn off the colision layer from Player to make him drop thru the drop_throw_platform group)
+		# // {
 		if (event.is_action_pressed("ui_up")):	# and parent.is_grounded
 			parent.set_collision_mask_bit(parent.DROP_THRU_BIT_7, true)		# Enable collision with "Drop_Thru" nodes
 			#print("on core, parent.DROP_THRU_BIT_7 bool: " + String(parent.get_collision_mask_bit(parent.DROP_THRU_BIT_7)))
@@ -29,6 +31,7 @@ func _input(event):
 					# unset drop_thru_bit, so that player's kinematic body stops colliding with drop_thru layer.
 					parent.set_collision_mask_bit(parent.DROP_THRU_BIT_7, false)
 			# otherwise, actually jump.
+		# // }
 			else:
 				parent.velocity.y = parent.max_jump_velocity
 				parent.is_jumping = true
