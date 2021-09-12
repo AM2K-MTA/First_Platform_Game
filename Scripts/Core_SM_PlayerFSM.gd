@@ -30,8 +30,17 @@ func _input(event):
 					#print("on Core_SM_playerFSM, drop_thru_raycasts, test if work!!")
 					# unset drop_thru_bit, so that player's kinematic body stops colliding with drop_thru layer.
 					parent.set_collision_mask_bit(parent.DROP_THRU_BIT_7, false)
-			# otherwise, actually jump.
+				
+				# mod Fix_Platform // {
+				if (parent._check_is_grounded()):
+					if (parent.raycasts_collider.has_method("is_in_group")):
+						if (parent.raycasts_collider.is_in_group("Drop_Thru_Group")):		# if "col_body" is on group "drop_thru_body", I could do "if (parent._check_is_grounded() and col_body_is_in_group("Drop_Thru_Group")"):
+							#print("On core, check is grounded on World layer is true !!!")
+							parent.emit_signal("player_drop_require_signal")
+							#print("on Core, col_body is on group: " + String(parent.raycasts_collider.is_in_group("Drop_Thru_Group")))
+				# mod Fix_Platform // }
 		# // }
+			# otherwise, actually jump.
 			else:
 				parent.velocity.y = parent.max_jump_velocity
 				parent.is_jumping = true
@@ -62,6 +71,10 @@ func _state_logic(delta):
 	parent._handle_move_input()
 	parent._apply_gravity(delta)
 	parent._apply_movement()
+	
+	if (Input.is_action_just_pressed("ui_select")):		# Just for "testing obj" purpose, go to the end of tilemap
+		print("on Core, temp teleport when ui_select is just pressed!!!!!")
+		parent.position = Vector2(2204, 200)
 	
 func _get_transition(delta):
 	match state:

@@ -95,6 +95,10 @@ collision_mask = 64
 collide_with_areas = true
 collide_with_bodies = false
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+rect = Rect2( -10, -45, 20, 75 )
+
 [connection signal="end_throw_donut_anim_signal" from="Body/CharacterRig" to="." method="_on_CharacterRig_end_throw_donut_anim_signal"]
 [connection signal="throw_item" from="Body/CharacterRig" to="." method="_throw_held_item"]
 [connection signal="throw_signal" from="Body/CharacterRig" to="." method="_on_CharacterRig_Donuts_throw_signal"]
+[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]

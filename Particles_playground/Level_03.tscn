@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/TileMap2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/PauseScreen.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Particles_playground/FallingPlatform_GE.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/FallingPlatform_GE.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/OneWayPlatform.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/MovingPlatform_v2.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Particles_playground/Skull_Portal.tscn" type="PackedScene" id=6]

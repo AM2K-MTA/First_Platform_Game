@@ -7,16 +7,19 @@ extends KinematicBody2D
 # jump: velocity.y = 0, jump input received --> velocity.y = -450 (value gradativelly drop to -13, -14 or 0.000X and start to fall) --> velocity.y = 0, velocity.y += X (value will be gradativelly incremented positivelly until touch the ground)
 # Soo, put the animation transition in some point between -50/-13, because the player is almost on max_jump_height, and in this point the fall animation start, and the strange transition happens (jump animation and fall animation)
 
+# Note "Level_01" tilemap size is aproximally (width: 2248, height: 896)
+
 signal grounded_updated(is_grounded)
 
 #const FloatingText_PS = preload("res://FloatingText.tscn")
 const RockProjectile_PS = preload("res://Scenes/Hand_FistProjectile.tscn")
 
 const UP = Vector2(0, -1)
-const SLOP_STOP = 64		# original code is 64 what is that for ??!
+const SLOP_STOP_THRESHOLD = 64.0		# Something like help player don't slide out of a platform or slide awkward (google "Slop stop" to undestand better)
 const DROP_THRU_BIT = 2
 const DROP_THRU_BIT_7 = 7
 
+var move_direction
 var velocity = Vector2()	# max_vel = 479.7 ou 479.7 (left and right side change just the negative sign to the left, left_max_vel = -479.5)
 var move_speed = 5.25 * Globals.UNIT_SIZE		# = 5 * Globals.UNIT_SIZE or = 5 * 32
 var gravity
@@ -63,6 +66,9 @@ var was_knife_thrown := false	# mod (new throwable item) --> If I throw this kni
 
 var is_dragged_by_movable_obj = false
 
+signal player_drop_require_signal		# mod Fix_Platform
+var raycasts_collider = null			# mod Fix_Platform
+
 func _ready():
 	# trocar o "gravity = 2 * ..." por "gravity = _get_h_weight() * ...", makes a nice effect of slow motion with gradative fall on diagonals down, like The Matrix game (voadora up, down + attack)
 	gravity = 2 * max_jump_height / pow(jump_duration, 2)
@@ -84,7 +90,14 @@ func _apply_movement():
 	if (is_jumping && velocity.y >= 0):
 		is_jumping = false
 	
-	velocity = move_and_slide(velocity, UP, SLOP_STOP)
+	var snap = Vector2.DOWN * 32 if !is_jumping else Vector2.ZERO
+	
+	if (move_direction == 0 && abs(velocity.x) < SLOP_STOP_THRESHOLD):
+		velocity.x = 0
+		
+	var stop_on_slop = true if get_floor_velocity().x == 0 else false
+	
+	velocity = move_and_slide_with_snap(velocity, snap, UP, stop_on_slop)
 	
 	# check reycasts to see if player is grounded, but just if they're not jumping and not falling through platform.
 	is_grounded = !is_jumping && get_collision_mask_bit(DROP_THRU_BIT) && _check_is_grounded()
@@ -100,15 +113,15 @@ func _apply_movement():
 			collision.collider.collide_with(collision, self)
 
 func _handle_move_input():
-	if (Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")):
-		#print(-int(Input.is_action_pressed("ui_left")) + int(Input.is_action_pressed("ui_right")))
+	if (Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")):		# return "-1" input left, "1" input right or "0" both was pressed at same time, player don't move
+		#print("on player, prosition: " + String(position))
 		#print(-int(Input.is_action_pressed("ui_right")))
 		# "Input.get_action_strength("ui_left")" return 1 if that Key was pressed or 0 if other is pressed
-	
+
 		#countNum += 1
 		#print("_handle_move_input() was called!, " + String(countNum))
 		# Get movement KeyPresses, converts to integers, and then store in move_direction.
-		var move_direction = -int(Input.is_action_pressed("ui_left")) + int(Input.is_action_pressed("ui_right"))
+		move_direction = -int(Input.is_action_pressed("ui_left")) + int(Input.is_action_pressed("ui_right"))
 		
 		# Lerp velocity.x towards the direction the player is pressing keys for, weighted based on if they're grounded or not.
 		velocity.x = lerp(velocity.x, move_speed * move_direction, _get_h_weight())
@@ -194,9 +207,12 @@ func _check_is_grounded():
 	for raycast in raycasts.get_children():
 		if (raycast.is_colliding()):
 			#print("on player._check_is_grounded(), raycast collided: " + String(raycast.name))		# that never happens, WHY IS NEVER TRUE and detect some collision??
+			raycasts_collider = raycast.get_collider()
 			return true
 	
 	# If loop completes then raycast was not detected
+	#print("on player, loop completed and no raycasts collision detect")
+	raycasts_collider = null
 	return false
 
 func _check_is_grounded2(raycast_container):
@@ -266,3 +282,10 @@ func _on_CharacterRig_end_throw_donut_anim_signal():
 		anim_player.play("run")
 	else:
 		anim_player.play("death_forward")
+
+func _on_VisibilityNotifier2D_viewport_exited(viewport):
+	print("on player, visibility notifier, ATTENTION.......... VIEWPORT_EXITED signal was called! Where is the player?????????")
+	#var getPos = String(position.x) + ", " + String(position.y)
+	#print("on player, visibility notifier, viewport_exited, player position: " + getPos)
+	#position = Vector2(2204, 200)
+	get_tree().quit()
