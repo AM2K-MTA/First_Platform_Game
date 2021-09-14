@@ -1,5 +1,8 @@
 extends Node2D
 
+# I don't finish the GUI Tutorial, I stop on Title: "Prepare the bomb and emerald counters"
+# Link to tutorial page: https://docs.godotengine.org/en/stable/getting_started/step_by_step/ui_game_user_interface.html
+
 var next_scene = null
 
 var player_location := Vector2(0, 0)
