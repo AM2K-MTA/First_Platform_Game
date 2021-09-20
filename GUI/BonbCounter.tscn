@@ -10,3 +10,10 @@ margin_top = -56.0
 margin_right = 36.0
 margin_bottom = 24.0
 rect_rotation = 16.8797
+
+[node name="Number" parent="Background" index="1"]
+anchor_right = 0.4
+margin_left = 2.0
+text = "99"
+align = 1
+clip_text = true

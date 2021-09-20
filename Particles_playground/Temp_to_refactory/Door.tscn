@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/Buildings/house1_DoorAnim.png" type="Texture" id=1]
-[ext_resource path="res://Door.gd" type="Script" id=2]
+[ext_resource path="res://Particles_playground/Temp_to_refactory/BasementDoor.png" type="Texture" id=1]
+[ext_resource path="res://Particles_playground/Temp_to_refactory/Door.gd" type="Script" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "CloseDoor"

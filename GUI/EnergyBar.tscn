@@ -8,17 +8,21 @@
 
 [sub_resource type="DynamicFont" id=1]
 size = 19
-extra_spacing_bottom = 6
+use_mipmaps = true
+use_filter = true
+extra_spacing_bottom = -4
 font_data = ExtResource( 3 )
 
 [node name="EnergyBar" instance=ExtResource( 1 )]
 margin_bottom = 40.0
 
 [node name="Count" parent="." index="0"]
+margin_right = 140.0
 margin_bottom = 40.0
-rect_min_size = Vector2( 100, 40 )
+rect_min_size = Vector2( 140, 40 )
 
 [node name="Background" parent="Count" index="0"]
+margin_right = 140.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 80, 40 )
 
@@ -26,11 +30,17 @@ rect_min_size = Vector2( 80, 40 )
 texture = ExtResource( 2 )
 
 [node name="Number" parent="Count/Background" index="1"]
+anchor_left = 0.33
+margin_left = -5.0
+margin_right = -5.0
 custom_fonts/font = SubResource( 1 )
-text = "14"
+text = "1999/1999"
+valign = 1
+clip_text = true
 
 [node name="Gauge" parent="." index="1"]
-margin_right = 352.0
+margin_left = 144.0
+margin_right = 392.0
 margin_bottom = 40.0
 texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 5 )

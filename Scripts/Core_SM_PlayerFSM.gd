@@ -72,9 +72,12 @@ func _state_logic(delta):
 	parent._apply_gravity(delta)
 	parent._apply_movement()
 	
-	if (Input.is_action_just_pressed("ui_select")):		# Just for "testing obj" purpose, go to the end of tilemap
-		print("on Core, temp teleport when ui_select is just pressed!!!!!")
-		parent.position = Vector2(2204, 200)
+	if (Input.is_action_just_pressed("ui_temp_debug")):		# Key = "K", Just for "testing obj" purpose, go to the end of tilemap
+		#print("on Core, temp teleport when ui_select is just pressed!!!!!")
+		#parent.position = Vector2(2204, 200)
+		#print("on Core, to temp debug, player.pos: " + String(parent.position))
+		#get_tree().current_scene.gui.set_position(Vector2(20, 30))
+		get_tree().current_scene.gui.set_position(Vector2(20, 30))
 	
 func _get_transition(delta):
 	match state:

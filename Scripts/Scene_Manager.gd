@@ -2,6 +2,7 @@ extends Node2D
 
 # I don't finish the GUI Tutorial, I stop on Title: "Prepare the bomb and emerald counters"
 # Link to tutorial page: https://docs.godotengine.org/en/stable/getting_started/step_by_step/ui_game_user_interface.html
+# Almost the as above, but on video and with some differences, link to the video Tutorial: https://youtu.be/y1E_y9AIqow
 
 var next_scene = null
 
@@ -13,17 +14,20 @@ var transition_type = TransitionType.NEW_SCENE
 
 onready var player = get_node("Player_mult_FSM")
 
+onready var gui = $CanvasLayer/GUI
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("Scene_Manager is ready!!")
+	#gui.set_position(Vector2(20, 20))
 
 func transition_to_party_screen():
-	print("on Scene_Manager, func transition_to_party_screen() was called")
+	#print("on Scene_Manager, func transition_to_party_screen() was called")
 	$ScreenTransition/AnimationPlayer.play("FadeToBlack")
 	transition_type = TransitionType.PARTY_SCREEN
 
 func transition_exit_party_screen():
-	print("on Scene_Manager, func transition_exit_party_screen() was called")
+	#print("on Scene_Manager, func transition_exit_party_screen() was called")
 	$ScreenTransition/AnimationPlayer.play("FadeToBlack")
 	transition_type = TransitionType.MENU_ONLY
 
@@ -71,7 +75,7 @@ func finished_fading_normal():
 		coreFSM.set_physics_process(true)
 	else:
 		if (!player.is_grounded):
-			print("on Scene_Manager, player is not grounded!!!")
+			#print("on Scene_Manager, player is not grounded!!!")
 			# if player is NOT grounded (in the air for example), he'll give a jump in the air, that make him enter on "states.fall" and fix that
 			coreFSM.state = coreFSM.states.fall
 		coreFSM.set_physics_process(true)

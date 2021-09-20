@@ -5,6 +5,7 @@ func _ready():
 	set_visible(false)
 
 func _input(event):
+	print("on PauseScreen, _input() says, heyyyyyyyyy!")
 	if (event.is_action_pressed("ui_pause")):	# When key "P" is pressed
 		set_visible(!get_tree().paused)		# if not pause then hide
 		get_tree().paused = !get_tree().paused
