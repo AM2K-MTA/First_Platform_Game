@@ -61,7 +61,13 @@ func continue_game():
 
 func go_to_menu_screen():
 	print("on Pause_Screen, func back_to_menu_screen() was called.............!")
+	print("on Pause_Screen, continue_button.is_processing_input(): " + str(is_processing_unhandled_input()))
 	get_tree().paused = true
+	set_process_unhandled_input(true)
+	
+	if(!continue_button.is_processing_input()):
+		print("on Pause_Screen, input is not processed!!!!!!")
+		print(is_processing())
 	
 	get_parent().set_layer(99)
 	set_visible(true)

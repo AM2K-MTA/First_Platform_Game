@@ -73,6 +73,18 @@ script = ExtResource( 3 )
 
 [node name="Level_01" parent="Current_Scene" instance=ExtResource( 2 )]
 
+[node name="Interface" type="CanvasLayer" parent="."]
+layer = 98
+
+[node name="GUI" parent="Interface" instance=ExtResource( 4 )]
+margin_right = 683.0
+margin_bottom = 137.0
+rect_scale = Vector2( 0.6, 0.5 )
+
+[node name="PauseScreen" parent="Interface" instance=ExtResource( 6 )]
+
+[node name="Pause_Screen" parent="Interface" instance=ExtResource( 5 )]
+
 [node name="Player_mult_FSM" parent="." instance=ExtResource( 1 )]
 position = Vector2( 45, 240 )
 scale = Vector2( 0.5, 0.5 )
@@ -91,14 +103,11 @@ __meta__ = {
 anims/FadeToBlack = SubResource( 1 )
 anims/FadeToNormal = SubResource( 2 )
 
-[node name="Interface" type="CanvasLayer" parent="."]
-layer = 98
+[connection signal="energy_changed" from="Player_mult_FSM/Health" to="Interface/GUI" method="_on_Health_energy_changed"]
+[connection signal="health_changed" from="Player_mult_FSM/Health" to="Interface/GUI" method="_on_Health_health_changed"]
+[connection signal="maximum_energy_changed" from="Player_mult_FSM/Health" to="Interface/GUI" method="_on_Health_maximum_energy_changed"]
+[connection signal="maximum_health_changed" from="Player_mult_FSM/Health" to="Interface/GUI" method="_on_Health_maximum_health_changed"]
+[connection signal="bomb_changed" from="Player_mult_FSM/Purse" to="Interface/GUI" method="_on_Purse_bomb_changed"]
+[connection signal="esmerald_changed" from="Player_mult_FSM/Purse" to="Interface/GUI" method="_on_Purse_esmerald_changed"]
 
-[node name="GUI" parent="Interface" instance=ExtResource( 4 )]
-margin_right = 683.0
-margin_bottom = 137.0
-rect_scale = Vector2( 0.6, 0.5 )
-
-[node name="PauseScreen" parent="Interface" instance=ExtResource( 6 )]
-
-[node name="Pause_Screen" parent="Interface" instance=ExtResource( 5 )]
+[editable path="Player_mult_FSM"]

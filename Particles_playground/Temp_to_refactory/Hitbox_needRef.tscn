@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Testing_playground/Hitbox.gd" type="Script" id=1]
+[ext_resource path="res://Particles_playground/Temp_to_refactory/Hitbox_needRef.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 6 )

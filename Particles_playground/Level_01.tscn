@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/TileMap2.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Particles_playground/Esmerald.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Particles_playground/Skull_Portal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/FallingPlatform_GE.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/MovingPlatform_v2.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/MovingPlatform_GE.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Fixed_Platform.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Particles_playground/Bomb.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Particles_playground/Dumb_Crab.tscn" type="PackedScene" id=10]
 
 [node name="Level_01" type="Node2D"]
 
@@ -63,7 +66,7 @@ move_to = Vector2( 384, 0 )
 
 [node name="MovingPlatform_GE2" parent="Platforms" instance=ExtResource( 6 )]
 position = Vector2( 1923, 448 )
-move_to = Vector2( 0, 324 )
+move_to = Vector2( 0, 200 )
 
 [node name="FallingPlatform_GE" parent="Platforms" instance=ExtResource( 4 )]
 position = Vector2( 1483, 352 )
@@ -82,3 +85,44 @@ position = Vector2( 2335, 335 )
 next_scene_path = "res://Particles_playground/Level_02.tscn"
 spawn_location = Vector2( 1872, 100 )
 is_locked = true
+
+[node name="Collectables" type="Node" parent="."]
+
+[node name="Esmeralds" type="Node" parent="Collectables"]
+
+[node name="Esmerald" parent="Collectables/Esmeralds" instance=ExtResource( 2 )]
+position = Vector2( 128, 464 )
+
+[node name="Esmerald2" parent="Collectables/Esmeralds" instance=ExtResource( 2 )]
+position = Vector2( 248, 640 )
+
+[node name="Esmerald3" parent="Collectables/Esmeralds" instance=ExtResource( 2 )]
+position = Vector2( 304, 616 )
+
+[node name="Esmerald4" parent="Collectables/Esmeralds" instance=ExtResource( 2 )]
+position = Vector2( 440, 504 )
+
+[node name="Esmerald5" parent="Collectables/Esmeralds" instance=ExtResource( 2 )]
+position = Vector2( 800, 376 )
+
+[node name="Bombs" type="Node" parent="Collectables"]
+
+[node name="Bomb" parent="Collectables/Bombs" instance=ExtResource( 8 )]
+position = Vector2( 176, 464 )
+
+[node name="Bomb2" parent="Collectables/Bombs" instance=ExtResource( 8 )]
+position = Vector2( 248, 592 )
+
+[node name="Bomb3" parent="Collectables/Bombs" instance=ExtResource( 8 )]
+position = Vector2( 304, 568 )
+
+[node name="Bomb4" parent="Collectables/Bombs" instance=ExtResource( 8 )]
+position = Vector2( 440, 464 )
+
+[node name="Bomb5" parent="Collectables/Bombs" instance=ExtResource( 8 )]
+position = Vector2( 736, 376 )
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Dumb_Crab" parent="Enemies" instance=ExtResource( 10 )]
+position = Vector2( 2176, 319 )

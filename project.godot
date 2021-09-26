@@ -14,10 +14,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Particles_playground/Temp_to_refactory/ConsumableItem.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Dumb_Crab",
+"language": "GDScript",
+"path": "res://Particles_playground/Dumb_Crab.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://Particles_playground/Temp_to_refactory/enemy.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Enemy_Crab",
+"language": "GDScript",
+"path": "res://Particles_playground/Enemy_Crab.gd"
+}, {
 "base": "Area2D",
 "class": "Hitbox",
 "language": "GDScript",
-"path": "res://Scripts/Hitbox.gd"
+"path": "res://Particles_playground/Temp_to_refactory/Hitbox_needRef.gd"
 }, {
 "base": "Node",
 "class": "InteractableItem",
@@ -56,6 +71,9 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ConsumableItem": "",
+"Dumb_Crab": "",
+"Enemy": "",
+"Enemy_Crab": "",
 "Hitbox": "",
 "InteractableItem": "",
 "InteractionComponentUI": "",
@@ -120,6 +138,7 @@ ui_temp_debug={
 2d_physics/layer_6="Throwable"
 2d_physics/layer_7="Door"
 2d_physics/layer_8="Drop_Thru_Body"
+2d_physics/layer_9="DamageBox"
 
 [physics]
 

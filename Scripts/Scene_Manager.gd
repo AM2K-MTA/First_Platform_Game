@@ -14,7 +14,7 @@ var transition_type = TransitionType.NEW_SCENE
 
 onready var player = get_node("Player_mult_FSM")
 
-onready var gui = $CanvasLayer/GUI
+onready var gui = $Interface/GUI
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

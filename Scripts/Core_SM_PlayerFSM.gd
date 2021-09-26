@@ -57,7 +57,6 @@ func _input(event):
 		# Variable jump
 		if (event.is_action_released("ui_up") && parent.velocity.y < parent.min_jump_velocity):
 			parent.velocity.y = parent.min_jump_velocity
-	
 
 func _state_logic(delta):
 	#print("PlayerFSM, _state_logic(delta)")
@@ -74,11 +73,27 @@ func _state_logic(delta):
 	
 	if (Input.is_action_just_pressed("ui_temp_debug")):		# Key = "K", Just for "testing obj" purpose, go to the end of tilemap
 		#print("on Core, temp teleport when ui_select is just pressed!!!!!")
-		#parent.position = Vector2(2204, 200)
+		parent.position = Vector2(2204, 200)
 		#print("on Core, to temp debug, player.pos: " + String(parent.position))
 		#get_tree().current_scene.gui.set_position(Vector2(20, 30))
-		get_tree().current_scene.gui.set_position(Vector2(20, 30))
-	
+		#get_tree().current_scene.gui.set_position(Vector2(20, 30))
+		#parent.get_node("Health").take_damage(10)
+		#parent.get_node("Health").heal(10)
+		
+		#parent.get_node("Health").energy_used(10)
+		#parent.get_node("Health").energy_recovered(10)
+		
+		#var newEnemy = load("res://Particles_playground/Enemy_Crab.tscn").instance()
+		#newEnemy.position = Vector2(1088, 640)
+		#print(newEnemy)
+		
+	if(Input.is_key_pressed(KEY_SHIFT)):
+		#parent.get_node("Health").take_damage(1)
+		#parent.get_node("Health").heal(1)
+		
+		#parent.get_node("Health").energy_used(1)
+		parent.get_node("Health").energy_recovered(1)
+
 func _get_transition(delta):
 	match state:
 		states.idle:

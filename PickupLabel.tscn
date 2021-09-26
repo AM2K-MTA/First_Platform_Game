@@ -1,0 +1,20 @@
+[gd_scene format=2]
+
+[node name="PickupLabel" type="NinePatchRect"]
+margin_left = 349.0
+margin_top = 263.0
+margin_right = 439.0
+margin_bottom = 309.0
+rect_min_size = Vector2( 90, 0 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
