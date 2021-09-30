@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/TileMap2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Particles_playground/Esmerald.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scenes/MovingPlatform_GE.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Fixed_Platform.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Particles_playground/Bomb.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Particles_playground/Temp_to_refactory/Plat_kinematic/Crab_Walker.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Particles_playground/Dumb_Crab.tscn" type="PackedScene" id=10]
 
 [node name="Level_01" type="Node2D"]
@@ -124,5 +125,8 @@ position = Vector2( 736, 376 )
 
 [node name="Enemies" type="Node" parent="."]
 
+[node name="Crab_Walker" parent="Enemies" instance=ExtResource( 9 )]
+position = Vector2( 1816, 687 )
+
 [node name="Dumb_Crab" parent="Enemies" instance=ExtResource( 10 )]
-position = Vector2( 2176, 319 )
+position = Vector2( 914, 699 )

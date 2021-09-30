@@ -39,7 +39,7 @@ var max_jump_height = 3.25 * Globals.UNIT_SIZE		# = 2.25 * Globals.UNIT_SIZE (UN
 var min_jump_height = 0.8 * Globals.UNIT_SIZE		# = 0.8 * Globals.UNIT_SIZE... But I put (0.8 * 32)
 var jump_duration = 0.5		# = 0.5		(0.8 fica quase uma queda com para-quedas)
 
-onready var raycasts = $Raycasts	# Do I need this here ??!
+onready var raycasts = $Raycasts
 
 var facing = 1
 onready var states_container = $States
@@ -68,6 +68,12 @@ var is_dragged_by_movable_obj = false
 
 signal player_drop_require_signal		# mod Fix_Platform
 var raycasts_collider = null			# mod Fix_Platform
+
+# // { mod Crab_Walker
+export var knockback = 7000
+export var knockup = 1000/2
+var was_hitted_side = null
+# // } mod Crab_Walker
 
 func _ready():
 	# trocar o "gravity = 2 * ..." por "gravity = _get_h_weight() * ...", makes a nice effect of slow motion with gradative fall on diagonals down, like The Matrix game (voadora up, down + attack)
@@ -289,3 +295,26 @@ func _on_VisibilityNotifier2D_viewport_exited(viewport):
 	#print("on player, visibility notifier, viewport_exited, player position: " + getPos)
 	#position = Vector2(2204, 200)
 	get_tree().quit()
+
+# // { mod Crab_Walker
+func _on_HurtBox_area_entered(area):
+	if (area.is_in_group("HitBox")):
+		var knock_side = knockback * -move_direction
+		if (was_hitted_side != null):
+			knock_side = knockback * was_hitted_side
+			
+		print("On player, area_entered, hit!")
+		velocity.x -= lerp(velocity.x, knock_side, 0.5)
+		velocity.y = lerp(0, -knockup, 0.6)
+		velocity = move_and_slide(velocity, UP)
+		blink()
+
+func blink():
+	body.visible = false
+	yield(get_tree().create_timer(0.05), "timeout")
+	body.visible = true
+	yield(get_tree().create_timer(0.07), "timeout")
+	body.visible = false
+	yield(get_tree().create_timer(0.1), "timeout")
+	body.visible = true
+# // } mod Crab_Walker
