@@ -104,6 +104,11 @@ Pause={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":79,"unicode":0,"echo":false,"script":null)
  ]
 }
+ui_temp_debug={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":75,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -115,6 +120,7 @@ Pause={
 2d_physics/layer_6="Throwable"
 2d_physics/layer_7="Door"
 2d_physics/layer_8="Drop_Thru_Body"
+2d_physics/layer_9="DamageBox"
 
 [physics]
 
