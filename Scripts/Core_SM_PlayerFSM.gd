@@ -18,6 +18,8 @@ func _input(event):
 	# create a array of values U like to check, then check if the array contain the values that U want
 	if [states.idle, states.run].has(state):
 		# jump
+		# Need to ref (refactory) this peace of code below (turn off the colision layer from Player to make him drop thru the drop_throw_platform group)
+		# // {
 		if (event.is_action_pressed("ui_up")):	# and parent.is_grounded
 			parent.set_collision_mask_bit(parent.DROP_THRU_BIT_7, true)		# Enable collision with "Drop_Thru" nodes
 			#print("on core, parent.DROP_THRU_BIT_7 bool: " + String(parent.get_collision_mask_bit(parent.DROP_THRU_BIT_7)))
@@ -28,6 +30,16 @@ func _input(event):
 					#print("on Core_SM_playerFSM, drop_thru_raycasts, test if work!!")
 					# unset drop_thru_bit, so that player's kinematic body stops colliding with drop_thru layer.
 					parent.set_collision_mask_bit(parent.DROP_THRU_BIT_7, false)
+				
+				# mod Fix_Platform // {
+				if (parent._check_is_grounded()):
+					if (parent.raycasts_collider.has_method("is_in_group")):
+						if (parent.raycasts_collider.is_in_group("Drop_Thru_Group")):		# if "col_body" is on group "drop_thru_body", I could do "if (parent._check_is_grounded() and col_body_is_in_group("Drop_Thru_Group")"):
+							#print("On core, check is grounded on World layer is true !!!")
+							parent.emit_signal("player_drop_require_signal")
+							#print("on Core, col_body is on group: " + String(parent.raycasts_collider.is_in_group("Drop_Thru_Group")))
+				# mod Fix_Platform // }
+		# // }
 			# otherwise, actually jump.
 			else:
 				parent.velocity.y = parent.max_jump_velocity
@@ -38,14 +50,37 @@ func _input(event):
 		elif (event.is_action_pressed("Throw_input")):
 			parent.can_throw_hand = true
 			#parent.anim_player.play("throw")
-			
 			print("on Core_SM._input(event), parent.get_collision_mask_bit(DROP_THRU_BIT): " + String(parent.get_collision_mask_bit(2)))
+		elif (event.is_action_pressed("Simple_ACTION") and parent.can_fire_atk_punch):
+			if (Input.is_key_pressed(KEY_SHIFT)):
+				print("On Player core_FSM, Simple_ACTION key was pressed with SHIFT, It is the key = SHIFT + 1")
+				if ( [states.idle, states.run].has(state) and parent.is_attacking_simple_atk == false):
+					parent.is_attacking_simple_atk = true
+					parent.can_turn_around = false
+					#parent.anim_player.play("atk_simple_punch_1st")
+					parent.anim_player_not_core.play("atk_simple_punch_1st")
+					yield(get_tree().create_timer(0.6), "timeout")
+					parent.is_attacking_simple_atk = false
+					parent.can_turn_around = true
+			else:
+				parent.can_fire_atk_punch = false
+				print("On Player core_FSM, Simple_ACTION key was pressed, It is the key = 1")
+				var atk_punch_instance = parent.throw_atk_punch.instance()
+				#atk_punch_instance.position = parent.get_global_position()		# original code
+				if parent.move_direction == null:
+					parent.move_direction = 1
+				#print(parent.position)
+				#print(parent.position + Vector2(20, 0) * Vector2(parent.move_direction, 0))
+				atk_punch_instance.shoot_direction = parent.move_direction
+				atk_punch_instance.position = parent.position + Vector2(20, 0) * Vector2(parent.move_direction, 0)
+				get_tree().current_scene.add_child(atk_punch_instance)
+				yield(get_tree().create_timer(parent.rate_of_fire_atk_punch), "timeout")
+				parent.can_fire_atk_punch = true
 			
 	if (state == states.jump):
 		# Variable jump
 		if (event.is_action_released("ui_up") && parent.velocity.y < parent.min_jump_velocity):
 			parent.velocity.y = parent.min_jump_velocity
-	
 
 func _state_logic(delta):
 	#print("PlayerFSM, _state_logic(delta)")
@@ -60,6 +95,29 @@ func _state_logic(delta):
 	parent._apply_gravity(delta)
 	parent._apply_movement()
 	
+	if (Input.is_action_just_pressed("ui_temp_debug")):		# Key = "K", Just for "testing obj" purpose, go to the end of tilemap
+		#print("on Core, temp teleport when ui_select is just pressed!!!!!")
+		#parent.position = Vector2(2204, 200)
+		#print("on Core, to temp debug, player.pos: " + String(parent.position))
+		#get_tree().current_scene.gui.set_position(Vector2(20, 30))
+		#get_tree().current_scene.gui.set_position(Vector2(20, 30))
+		parent.get_node("Health").take_damage(10)
+		#parent.get_node("Health").heal(10)
+		
+		#parent.get_node("Health").energy_used(10)
+		#parent.get_node("Health").energy_recovered(10)
+		
+		#var newEnemy = load("res://Particles_playground/Enemy_Crab.tscn").instance()
+		#newEnemy.position = Vector2(1088, 640)
+		#print(newEnemy)
+		
+	if(Input.is_key_pressed(KEY_SHIFT)):
+		#parent.get_node("Health").take_damage(1)
+		parent.get_node("Health").heal(1)
+		
+		#parent.get_node("Health").energy_used(1)
+		#parent.get_node("Health").energy_recovered(1)
+
 func _get_transition(delta):
 	match state:
 		states.idle:

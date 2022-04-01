@@ -9,15 +9,55 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Actor",
+"language": "GDScript",
+"path": "res://Particles_playground/Temp_to_refactory/Plat_kinematic/Actor_plat_kinematic.gd"
+}, {
 "base": "InteractableItem",
 "class": "ConsumableItem",
 "language": "GDScript",
 "path": "res://Particles_playground/Temp_to_refactory/ConsumableItem.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Crab_Walker",
+"language": "GDScript",
+"path": "res://Particles_playground/Temp_to_refactory/Plat_kinematic/Crab_Walker.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Dumb_Crab",
+"language": "GDScript",
+"path": "res://Particles_playground/Dumb_Crab.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Dumb_Crab_temp",
+"language": "GDScript",
+"path": "res://Particles_playground/Dumb_Crab_temp.gd"
+}, {
+"base": "Actor",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://Particles_playground/Temp_to_refactory/Plat_kinematic/Enemy_plat_kinematic.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Enemy_Crab",
+"language": "GDScript",
+"path": "res://Particles_playground/Enemy_Crab.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Golem",
+"language": "GDScript",
+"path": "res://Particles_playground/Golem.gd"
+}, {
+"base": "Position2D",
+"class": "Gun",
+"language": "GDScript",
+"path": "res://Particles_playground/Temp_to_refactory/Plat_kinematic/Gun.gd"
+}, {
 "base": "Area2D",
 "class": "Hitbox",
 "language": "GDScript",
-"path": "res://Scripts/Hitbox.gd"
+"path": "res://Particles_playground/Temp_to_refactory/Hitbox_needRef.gd"
 }, {
 "base": "Node",
 "class": "InteractableItem",
@@ -55,7 +95,15 @@ _global_script_classes=[ {
 "path": "res://Scripts/StateMachine.gd"
 } ]
 _global_script_class_icons={
+"Actor": "",
 "ConsumableItem": "",
+"Crab_Walker": "",
+"Dumb_Crab": "",
+"Dumb_Crab_temp": "",
+"Enemy": "",
+"Enemy_Crab": "",
+"Golem": "",
+"Gun": "",
 "Hitbox": "",
 "InteractableItem": "",
 "InteractionComponentUI": "",
@@ -104,6 +152,16 @@ Pause={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":79,"unicode":0,"echo":false,"script":null)
  ]
 }
+ui_temp_debug={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":75,"unicode":0,"echo":false,"script":null)
+ ]
+}
+Simple_ACTION={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":49,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -115,6 +173,7 @@ Pause={
 2d_physics/layer_6="Throwable"
 2d_physics/layer_7="Door"
 2d_physics/layer_8="Drop_Thru_Body"
+2d_physics/layer_9="DamageBox"
 
 [physics]
 

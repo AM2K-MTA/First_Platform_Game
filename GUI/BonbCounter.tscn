@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://GUI/Counter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://GUI/BonbCounter.gd" type="Script" id=2]
+
+[node name="BonbCounter" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Icon" parent="Background" index="0"]
+margin_left = -64.0
+margin_top = -56.0
+margin_right = 36.0
+margin_bottom = 24.0
+rect_rotation = 16.8797
+
+[node name="Number" parent="Background" index="1"]
+anchor_right = 0.4
+margin_left = 2.0
+text = "99"
+align = 1
+clip_text = true

@@ -59,5 +59,5 @@ func remove():
 	queue_free()
 
 func _on_VisibilityNotifier2D_screen_exited():
-	#print("Oh no! I'm leaving the screen area")
+	print("Oh no! I'm leaving the screen area")
 	queue_free()

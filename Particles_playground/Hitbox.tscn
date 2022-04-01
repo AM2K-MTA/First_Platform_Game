@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Particles_playground/Temp_to_refactory/Hitbox_needRef.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Particles_playground/Hitbox.gd" type="Script" id=2]
+
+[node name="Hitbox" groups=[
+"Group_HitBox",
+] instance=ExtResource( 1 )]
+input_pickable = false
+collision_layer = 16
+collision_mask = 256
+script = ExtResource( 2 )
+
+[connection signal="area_entered" from="." to="." method="_on_Hitbox_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_Hitbox_area_exited"]

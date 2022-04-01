@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Player_mult_FSM.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Particles_playground/Level_01.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Scene_Manager.gd" type="Script" id=3]
+[ext_resource path="res://GUI/GUI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Particles_playground/Temp_to_refactory/Pause_Screen.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/PauseScreen.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "FadeToBlack"
@@ -70,6 +73,18 @@ script = ExtResource( 3 )
 
 [node name="Level_01" parent="Current_Scene" instance=ExtResource( 2 )]
 
+[node name="Interface" type="CanvasLayer" parent="."]
+layer = 98
+
+[node name="GUI" parent="Interface" instance=ExtResource( 4 )]
+margin_right = 683.0
+margin_bottom = 137.0
+rect_scale = Vector2( 0.6, 0.5 )
+
+[node name="PauseScreen" parent="Interface" instance=ExtResource( 6 )]
+
+[node name="Pause_Screen" parent="Interface" instance=ExtResource( 5 )]
+
 [node name="Player_mult_FSM" parent="." instance=ExtResource( 1 )]
 position = Vector2( 45, 240 )
 scale = Vector2( 0.5, 0.5 )
@@ -87,3 +102,12 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenTransition"]
 anims/FadeToBlack = SubResource( 1 )
 anims/FadeToNormal = SubResource( 2 )
+
+[connection signal="energy_changed" from="Player_mult_FSM/Health" to="Interface/GUI" method="_on_Health_energy_changed"]
+[connection signal="health_changed" from="Player_mult_FSM/Health" to="Interface/GUI" method="_on_Health_health_changed"]
+[connection signal="maximum_energy_changed" from="Player_mult_FSM/Health" to="Interface/GUI" method="_on_Health_maximum_energy_changed"]
+[connection signal="maximum_health_changed" from="Player_mult_FSM/Health" to="Interface/GUI" method="_on_Health_maximum_health_changed"]
+[connection signal="bomb_changed" from="Player_mult_FSM/Purse" to="Interface/GUI" method="_on_Purse_bomb_changed"]
+[connection signal="esmerald_changed" from="Player_mult_FSM/Purse" to="Interface/GUI" method="_on_Purse_esmerald_changed"]
+
+[editable path="Player_mult_FSM"]

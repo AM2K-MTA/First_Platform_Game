@@ -1,0 +1,146 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://GUI/Bar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://GUI/Comfortaa-Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://GUI/LifeBar.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 19
+use_mipmaps = true
+use_filter = true
+extra_spacing_bottom = -5
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "SETUP"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Count/Background/Number:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 48.2, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Count/Background/Number:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Count/Background/Title:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "healing_effect"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Count/Background/Number:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 51.2, 0 ), Vector2( 49.2, 0 ), Vector2( 45.2, 0 ), Vector2( 50, 0 ), Vector2( 48.2, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Count/Background/Number:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.517647, 0.941176, 0.054902, 1 ), Color( 0.517647, 0.941176, 0.054902, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Count/Background/Number:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 51.2, 0 ), Vector2( 49.2, 0 ), Vector2( 45.2, 0 ), Vector2( 50, 0 ), Vector2( 48.2, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Count/Background/Number:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.87451, 0, 0, 1 ), Color( 0.87451, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="LifeBar" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Count" parent="." index="0"]
+margin_right = 140.0
+rect_min_size = Vector2( 140, 53 )
+
+[node name="Background" parent="Count" index="0"]
+margin_right = 140.0
+
+[node name="Title" parent="Count/Background" index="0"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -20.0
+margin_bottom = 20.0
+
+[node name="Number" parent="Count/Background" index="1"]
+modulate = Color( 0.87451, 0, 0, 1 )
+anchor_left = 0.38
+margin_left = -8.0
+margin_right = -8.00006
+custom_fonts/font = SubResource( 1 )
+text = "1999/1999"
+valign = 1
+clip_text = true
+
+[node name="Gauge" parent="." index="1"]
+margin_left = 144.0
+margin_right = 540.0
+value = 40.0
+
+[node name="Tween" type="Tween" parent="." index="2"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+anims/SETUP = SubResource( 2 )
+anims/healing_effect = SubResource( 3 )
+anims/shake = SubResource( 4 )

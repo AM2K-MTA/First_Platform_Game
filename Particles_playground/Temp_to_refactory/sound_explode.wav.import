@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sound_explode.wav-6b7e92655a653dd85cf4b1ab52f14f87.sample"
+
+[deps]
+
+source_file="res://Particles_playground/Temp_to_refactory/sound_explode.wav"
+dest_files=[ "res://.import/sound_explode.wav-6b7e92655a653dd85cf4b1ab52f14f87.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -10,8 +10,8 @@ export(int) var spawn_direction = 1
 export(bool) var is_locked = false
 
 func _ready():
-	print("Skull_Portal is ready!!")
-	print(next_scene_path)
+	#print("Skull_Portal is ready!!")
+	#print(next_scene_path)
 	emit_signal("from_parent_to_particle_should_emitting_signal", !is_locked)
 
 func _process(delta):
@@ -36,4 +36,3 @@ func _on_Skull_Portal_body_entered(body):
 			var scene_manager = get_tree().current_scene
 			scene_manager.transition_to_scene(next_scene_path, spawn_location, spawn_direction)
 			#print("on Skull_Portal, func body_entered(), next_scene_path: " + String(next_scene_path))
-
