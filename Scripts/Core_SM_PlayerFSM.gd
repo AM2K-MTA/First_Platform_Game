@@ -113,7 +113,9 @@ func _state_logic(delta):
 		
 	if(Input.is_key_pressed(KEY_SHIFT)):
 		#parent.get_node("Health").take_damage(1)
-		parent.get_node("Health").heal(1)
+#		parent.get_node("Health").heal(1)
+		
+		parent.position = Vector2(1870, 130)
 		
 		#parent.get_node("Health").energy_used(1)
 		#parent.get_node("Health").energy_recovered(1)
