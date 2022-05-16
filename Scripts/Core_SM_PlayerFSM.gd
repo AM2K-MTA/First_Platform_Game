@@ -115,7 +115,16 @@ func _state_logic(delta):
 		#parent.get_node("Health").take_damage(1)
 #		parent.get_node("Health").heal(1)
 		
-		parent.position = Vector2(1870, 130)
+#		print("On ", self.name, "player.pos: ", parent.position)
+		var get_currentLevel_name = get_tree().current_scene.get_node("Current_Scene").get_child(0).name
+#		print("On ", self.name, "get_level.name: ", get_currentLevel_name)
+		if (get_currentLevel_name == "Level_TrainingArena"):
+			if (Input.is_action_pressed("ui_down")):
+				parent.position = Vector2(85, 560)
+			elif (Input.is_action_pressed("ui_up")):
+				parent.position = Vector2(285, 420)
+		else:
+			parent.position = Vector2(1850, 350)
 		
 		#parent.get_node("Health").energy_used(1)
 		#parent.get_node("Health").energy_recovered(1)
