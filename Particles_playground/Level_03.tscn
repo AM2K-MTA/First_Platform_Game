@@ -4,7 +4,7 @@
 [ext_resource path="res://Scenes/FallingPlatform_GE.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/OneWayPlatform.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/MovingPlatform_v2.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Particles_playground/Skull_Portal.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Skull_Portal.tscn" type="PackedScene" id=6]
 
 [node name="Level_03" type="Node2D"]
 

@@ -50,8 +50,32 @@ func _input(event):
 		elif (event.is_action_pressed("Throw_input")):
 			parent.can_throw_hand = true
 			#parent.anim_player.play("throw")
-			
 			print("on Core_SM._input(event), parent.get_collision_mask_bit(DROP_THRU_BIT): " + String(parent.get_collision_mask_bit(2)))
+		elif (event.is_action_pressed("Simple_ACTION") and parent.can_fire_atk_punch):
+			if (Input.is_key_pressed(KEY_SHIFT)):
+				print("On Player core_FSM, Simple_ACTION key was pressed with SHIFT, It is the key = SHIFT + 1")
+				if ( [states.idle, states.run].has(state) and parent.is_attacking_simple_atk == false):
+					parent.is_attacking_simple_atk = true
+					parent.can_turn_around = false
+					#parent.anim_player.play("atk_simple_punch_1st")
+					parent.anim_player_not_core.play("atk_simple_punch_1st")
+					yield(get_tree().create_timer(0.6), "timeout")
+					parent.is_attacking_simple_atk = false
+					parent.can_turn_around = true
+			else:
+				parent.can_fire_atk_punch = false
+				print("On Player core_FSM, Simple_ACTION key was pressed, It is the key = 1")
+				var atk_punch_instance = parent.throw_atk_punch.instance()
+				#atk_punch_instance.position = parent.get_global_position()		# original code
+				if parent.move_direction == null:
+					parent.move_direction = 1
+				#print(parent.position)
+				#print(parent.position + Vector2(20, 0) * Vector2(parent.move_direction, 0))
+				atk_punch_instance.shoot_direction = parent.move_direction
+				atk_punch_instance.position = parent.position + Vector2(20, 0) * Vector2(parent.move_direction, 0)
+				get_tree().current_scene.add_child(atk_punch_instance)
+				yield(get_tree().create_timer(parent.rate_of_fire_atk_punch), "timeout")
+				parent.can_fire_atk_punch = true
 			
 	if (state == states.jump):
 		# Variable jump
@@ -89,7 +113,22 @@ func _state_logic(delta):
 		
 	if(Input.is_key_pressed(KEY_SHIFT)):
 		#parent.get_node("Health").take_damage(1)
+<<<<<<< HEAD
 		parent.get_node("Health").heal(1)
+=======
+#		parent.get_node("Health").heal(1)
+		
+#		print("On ", self.name, "player.pos: ", parent.position)
+		var get_currentLevel_name = get_tree().current_scene.get_node("Current_Scene").get_child(0).name
+#		print("On ", self.name, "get_level.name: ", get_currentLevel_name)
+		if (get_currentLevel_name == "Level_TrainingArena"):
+			if (Input.is_action_pressed("ui_down")):
+				parent.position = Vector2(85, 560)
+			elif (Input.is_action_pressed("ui_up")):
+				parent.position = Vector2(285, 420)
+		else:
+			parent.position = Vector2(1850, 350)
+>>>>>>> Attack-Implementation
 		
 		#parent.get_node("Health").energy_used(1)
 		#parent.get_node("Health").energy_recovered(1)

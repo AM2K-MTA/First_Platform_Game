@@ -13,6 +13,14 @@ var movement = Vector2()
 var speed = 100
 var moving_left = true
 
+<<<<<<< HEAD
+=======
+func _ready():
+	#$Sprite.visible = true		# He is invisible and that don't fix It
+#	print("____________ on crab, layer: " + str(get_collision_layer_bit(2)))
+	pass
+
+>>>>>>> Attack-Implementation
 func _physics_process(delta):
 	movement.y += GRAVITY * delta
 	
@@ -46,5 +54,9 @@ func _on_HitBox_R_body_entered(body):
 
 func _on_HurtBox_body_entered(body):
 	if (body.name == "Player_mult_FSM"):
+<<<<<<< HEAD
+=======
+		
+>>>>>>> Attack-Implementation
 		($Hit as AudioStreamPlayer2D).play()
 		$AnimationPlayer.play("destroy")

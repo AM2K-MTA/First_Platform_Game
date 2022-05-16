@@ -24,8 +24,7 @@ func _get_transition(delta):
 			#print("parent.velocity.x: " + String(parent.velocity.x))
 			#print("parent.state: " + String(parent.core_SM.state))
 			if (parent.end_throw_anim_bool):
-				return states.none
-			if (parent.end_throw_anim_bool):
+				print("___ # ___ On Action_SM_PlayerFSM, get_transition(), throw anim ends, return state none!")
 				return states.none
 
 func _enter_state(new_state, old_state):

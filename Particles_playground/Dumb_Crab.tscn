@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [gd_scene load_steps=18 format=2]
+=======
+[gd_scene load_steps=19 format=2]
+>>>>>>> Attack-Implementation
 
 [ext_resource path="res://Particles_playground/Temp_to_refactory/sound_hit.wav" type="AudioStream" id=1]
 [ext_resource path="res://Particles_playground/Temp_to_refactory/bullet.png" type="Texture" id=2]
@@ -6,17 +10,28 @@
 [ext_resource path="res://Particles_playground/Temp_to_refactory/enemy.png" type="Texture" id=4]
 [ext_resource path="res://Particles_playground/Dumb_Crab.gd" type="Script" id=5]
 [ext_resource path="res://Particles_playground/Core_SM_Dumb_Crab.gd" type="Script" id=6]
+<<<<<<< HEAD
 
 [sub_resource type="Animation" id=13]
 resource_name = "explode"
 length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
+=======
+[ext_resource path="res://Particles_playground/Dumb_Crab_HurtBox.gd" type="Script" id=7]
+
+[sub_resource type="Animation" id=1]
+resource_name = "explode"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Explosion:emitting")
+>>>>>>> Attack-Implementation
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
+<<<<<<< HEAD
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -24,11 +39,21 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:rotation_degrees")
+=======
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Explosion:process_material:scale")
+>>>>>>> Attack-Implementation
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
+<<<<<<< HEAD
 "times": PoolRealArray( 0, 0.8 ),
 "transitions": PoolRealArray( 0.0796601, 1 ),
 "update": 0,
@@ -36,11 +61,21 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:self_modulate")
+=======
+"times": PoolRealArray( 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 4.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Hit:playing")
+>>>>>>> Attack-Implementation
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
+<<<<<<< HEAD
 "times": PoolRealArray( 0, 0.5, 1.1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
@@ -48,11 +83,21 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Explosion:emitting")
+=======
+"times": PoolRealArray( 0.00999999 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Explode:playing")
+>>>>>>> Attack-Implementation
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
+<<<<<<< HEAD
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -60,11 +105,21 @@ tracks/3/keys = {
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Explosion:process_material:scale")
+=======
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+>>>>>>> Attack-Implementation
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
+<<<<<<< HEAD
 "times": PoolRealArray( 0.6, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
@@ -72,11 +127,23 @@ tracks/4/keys = {
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Hit:playing")
+=======
+"times": PoolRealArray( 1.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_pre_die"
+} ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:collision_layer")
+>>>>>>> Attack-Implementation
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
+<<<<<<< HEAD
 "times": PoolRealArray( 0.00999999 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -84,6 +151,15 @@ tracks/5/keys = {
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Explode:playing")
+=======
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+>>>>>>> Attack-Implementation
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -91,6 +167,7 @@ tracks/6/enabled = true
 tracks/6/keys = {
 "times": PoolRealArray( 0.8 ),
 "transitions": PoolRealArray( 1 ),
+<<<<<<< HEAD
 "update": 1,
 "values": [ true ]
 }
@@ -141,23 +218,34 @@ tracks/10/enabled = true
 tracks/10/keys = {
 "times": PoolRealArray( 0.8 ),
 "transitions": PoolRealArray( 1 ),
+=======
+>>>>>>> Attack-Implementation
 "values": [ {
 "args": [  ],
 "method": "_pre_explode"
 } ]
 }
 
+<<<<<<< HEAD
 [sub_resource type="Animation" id=1]
 resource_name = "explode2"
 length = 6.0
 step = 0.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
+=======
+[sub_resource type="Animation" id=2]
+length = 6.0
+step = 0.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Explosion:emitting")
+>>>>>>> Attack-Implementation
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
+<<<<<<< HEAD
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -165,11 +253,21 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Explosion:emitting")
+=======
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+>>>>>>> Attack-Implementation
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
+<<<<<<< HEAD
 "times": PoolRealArray( 1 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -182,6 +280,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
+=======
+>>>>>>> Attack-Implementation
 "times": PoolRealArray( 0.8, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
@@ -192,6 +292,7 @@ tracks/2/keys = {
 "method": "_die"
 } ]
 }
+<<<<<<< HEAD
 tracks/3/type = "value"
 tracks/3/path = NodePath("Sprite:self_modulate")
 tracks/3/interp = 1
@@ -209,6 +310,11 @@ tracks/3/keys = {
 resource_name = "fall"
 length = 0.4
 loop = true
+=======
+
+[sub_resource type="Animation" id=3]
+length = 0.4
+>>>>>>> Attack-Implementation
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -216,6 +322,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
+<<<<<<< HEAD
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -223,6 +330,15 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=3]
+=======
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 3.13834, 2.21914 ),
+"update": 1,
+"values": [ 4, 6 ]
+}
+
+[sub_resource type="Animation" id=4]
+>>>>>>> Attack-Implementation
 length = 6.75
 loop = true
 step = 0.25
@@ -236,6 +352,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.75, 1.5, 2.25, 3, 3.75, 4.5, 5.25, 6, 6.75 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
+<<<<<<< HEAD
 "values": [ 5, 6, 5, 6, 5, 6, 7, 6, 7, 5 ]
 }
 
@@ -243,6 +360,14 @@ tracks/0/keys = {
 length = 1.25
 loop = true
 step = 0.25
+=======
+"values": [ 0, 6, 5, 6, 5, 6, 7, 6, 7, 5 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 1.2
+loop = true
+>>>>>>> Attack-Implementation
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -250,6 +375,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
+<<<<<<< HEAD
 "times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
@@ -274,6 +400,32 @@ colors = PoolColorArray( 1, 1, 1, 0.501961, 0, 0, 0, 0 )
 gradient = SubResource( 8 )
 
 [sub_resource type="ParticlesMaterial" id=10]
+=======
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2 ),
+"transitions": PoolRealArray( 3.36358, 3.36358, 3.36358, 3.36358, 3.36358, 3.36358, 3.36358 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 7.0
+height = 5.0
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 4, 7 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 17, 28 )
+
+[sub_resource type="Gradient" id=9]
+offsets = PoolRealArray( 0.5, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.501961, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=10]
+gradient = SubResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=11]
+>>>>>>> Attack-Implementation
 emission_shape = 1
 emission_sphere_radius = 8.0
 flag_disable_z = true
@@ -284,11 +436,21 @@ initial_velocity_random = 0.5
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle_random = 1.0
+<<<<<<< HEAD
 scale = 4.0
 scale_random = 1.0
 color_ramp = SubResource( 9 )
 
 [node name="Dumb_Crab" type="KinematicBody2D"]
+=======
+scale = 2.5
+scale_random = 1.0
+color_ramp = SubResource( 10 )
+
+[node name="Dumb_Crab" type="KinematicBody2D" groups=[
+"Enemies",
+]]
+>>>>>>> Attack-Implementation
 collision_layer = 0
 collision_mask = 3
 script = ExtResource( 5 )
@@ -306,21 +468,37 @@ scale = Vector2( 11.7528, 5.43145 )
 pause_particles = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+<<<<<<< HEAD
 anims/explode = SubResource( 13 )
 anims/explode2 = SubResource( 1 )
 anims/fall = SubResource( 2 )
 anims/idle = SubResource( 3 )
 anims/walk = SubResource( 4 )
+=======
+anims/explode = SubResource( 1 )
+anims/explode2 = SubResource( 2 )
+anims/fall = SubResource( 3 )
+anims/idle = SubResource( 4 )
+anims/walk = SubResource( 5 )
+>>>>>>> Attack-Implementation
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 4 )
 hframes = 8
+<<<<<<< HEAD
 frame = 7
+=======
+frame = 5
+>>>>>>> Attack-Implementation
 
 [node name="Shape" type="CollisionShape2D" parent="."]
 position = Vector2( -0.54036, -0.0807199 )
 rotation = 1.5708
+<<<<<<< HEAD
 shape = SubResource( 5 )
+=======
+shape = SubResource( 6 )
+>>>>>>> Attack-Implementation
 
 [node name="WallDetectorFront" type="RayCast2D" parent="."]
 enabled = true
@@ -358,7 +536,11 @@ position = Vector2( -14, 0 )
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox_L"]
+<<<<<<< HEAD
 shape = SubResource( 12 )
+=======
+shape = SubResource( 7 )
+>>>>>>> Attack-Implementation
 
 [node name="HitBox_R" type="Area2D" parent="." groups=[
 "HitBox",
@@ -367,6 +549,7 @@ position = Vector2( 13, 0 )
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox_R"]
+<<<<<<< HEAD
 shape = SubResource( 12 )
 
 [node name="HurtBox" type="Area2D" parent="."]
@@ -376,6 +559,21 @@ collision_layer = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2( 0, -1 )
 shape = SubResource( 11 )
+=======
+shape = SubResource( 7 )
+
+[node name="HurtBox" type="Area2D" parent="." groups=[
+"DamageBox",
+]]
+position = Vector2( 0, -9 )
+collision_layer = 256
+collision_mask = 16
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2( 0, 6 )
+shape = SubResource( 8 )
+>>>>>>> Attack-Implementation
 
 [node name="Explosion" type="Particles2D" parent="."]
 modulate = Color( 1, 1, 1, 0.685843 )
@@ -385,7 +583,11 @@ lifetime = 0.5
 one_shot = true
 speed_scale = 1.2
 explosiveness = 0.76
+<<<<<<< HEAD
 process_material = SubResource( 10 )
+=======
+process_material = SubResource( 11 )
+>>>>>>> Attack-Implementation
 texture = ExtResource( 2 )
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="."]
@@ -396,4 +598,8 @@ stream = ExtResource( 3 )
 
 [connection signal="body_entered" from="HitBox_L" to="." method="_on_HitBox_L_body_entered"]
 [connection signal="body_entered" from="HitBox_R" to="." method="_on_HitBox_R_body_entered"]
+<<<<<<< HEAD
+=======
+[connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_HurtBox_area_entered"]
+>>>>>>> Attack-Implementation
 [connection signal="body_entered" from="HurtBox" to="." method="_on_HurtBox_body_entered"]

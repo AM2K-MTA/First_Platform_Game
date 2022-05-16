@@ -94,11 +94,23 @@ func _on_HitBox_L_body_entered(body):
 	if (body.name == "Player_mult_FSM"):
 		print("on Dumb_Crab, player entered on HitBox_L area!!")
 		(body as KinematicBody2D).was_hitted_side = -1
+<<<<<<< HEAD
+=======
+	elif (body.name == "Throw_atk_Punch"):
+		print("on Dumb_Crab, Throw_atk_Punch.tscn entered on HitBox_L area!!")
+		is_dead = true
+>>>>>>> Attack-Implementation
 
 func _on_HitBox_R_body_entered(body):
 	if (body.name == "Player_mult_FSM"):
 		print("on Dumb_Crab, player entered on HitBox_R area!!")
 		(body as KinematicBody2D).was_hitted_side = 1
+<<<<<<< HEAD
+=======
+	elif (body.name == "Throw_atk_Punch"):
+		print("on Dumb_Crab, Throw_atk_Punch.tscn entered on HitBox_R area!!")
+		is_dead = true
+>>>>>>> Attack-Implementation
 
 func _on_HurtBox_body_entered(body):
 	if (body.name == "Player_mult_FSM"):

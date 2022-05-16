@@ -14,6 +14,12 @@ signal grounded_updated(is_grounded)
 #const FloatingText_PS = preload("res://FloatingText.tscn")
 const RockProjectile_PS = preload("res://Scenes/Hand_FistProjectile.tscn")
 
+# // { referent to mod "Throw_atk_Punch.tscn", It's a simple attack that'll be used to create hit combos
+const throw_atk_punch = preload("res://Particles_playground/Throw_atk_Punch.tscn")
+var can_fire_atk_punch = true
+var rate_of_fire_atk_punch = 0.4
+# // }  referent to mod "Throw_atk_Punch.tscn", It's a simple attack that'll be used to create hit combos
+
 const UP = Vector2(0, -1)
 const SLOP_STOP_THRESHOLD = 64.0		# Something like help player don't slide out of a platform or slide awkward (google "Slop stop" to undestand better)
 const DROP_THRU_BIT = 2
@@ -51,6 +57,13 @@ onready var drop_thru_raycasts = $DropThruRayCasts
 onready var body = $Body
 onready var held_item_position = $Body/CharacterRig/Torso/RightArm/HeldItemPosition
 #onready var hitbox = $Hitbox
+
+# // {	mod animation "atk_simple_punch_1st"
+onready var anim_player_not_core = $Body/CharacterRig/AnimationPlayer_not_core_anim
+onready var timer_atack = $Body/CharacterRig/Timer_Attack
+var is_attacking_simple_atk = false
+var can_turn_around = true		# If true and Input receive that make player turn, he turn ELSE he stay facing the same direction
+# // }	mod animation "atk_simple_punch_1st"
 
 var countNum : int = 1
 
@@ -100,7 +113,20 @@ func _apply_movement():
 	
 	if (move_direction == 0 && abs(velocity.x) < SLOP_STOP_THRESHOLD):
 		velocity.x = 0
+<<<<<<< HEAD
 		
+=======
+	
+	# // { Mod19mar22 1/2 to fix bug of player running without the run animation, It's running with "idle" animation
+	# Make player stop moving to throw a object
+	if (action_SM.state == 1):	# action_SM.state = 1 = state "throw_fist" 
+#		print("core_SM: " + str(core_SM.state))
+#		print("action_SM: " + str(action_SM.state))
+		velocity.x = 0
+	# // }
+#	print("can_throw_hand: " + str(can_throw_hand))
+	
+>>>>>>> Attack-Implementation
 	var stop_on_slop = true if get_floor_velocity().x == 0 else false
 	
 	velocity = move_and_slide_with_snap(velocity, snap, UP, stop_on_slop)
@@ -124,34 +150,40 @@ func _handle_move_input():
 		#print(-int(Input.is_action_pressed("ui_right")))
 		# "Input.get_action_strength("ui_left")" return 1 if that Key was pressed or 0 if other is pressed
 
+<<<<<<< HEAD
+=======
+		var previous_move_dir = move_direction
+		
+>>>>>>> Attack-Implementation
 		#countNum += 1
 		#print("_handle_move_input() was called!, " + String(countNum))
 		# Get movement KeyPresses, converts to integers, and then store in move_direction.
 		move_direction = -int(Input.is_action_pressed("ui_left")) + int(Input.is_action_pressed("ui_right"))
 		
-		# Lerp velocity.x towards the direction the player is pressing keys for, weighted based on if they're grounded or not.
-		velocity.x = lerp(velocity.x, move_speed * move_direction, _get_h_weight())
-		#print("velocity.x: " + String(velocity.x))
-		#print("move_speed: " + String(move_speed))
-		# Set sprite facing based on the last (movement) key pressed.
-		if (move_direction != 0):
-			$Body.scale.x = move_direction
-			
-			#countNum += 1
-			#print("_handle_move_input() was called!, " + String(countNum))
-			# mod (DirectionInput_rayCast) next 6 lines
-			facing = move_direction
-			var raycast_look_door = $RayCast_Look_Door
-			raycast_look_door.cast_to = Vector2(50 * facing, 0)
-			raycast_look_door.force_raycast_update()
-			if (raycast_look_door.is_colliding()):
-				print(String(raycast_look_door.get_collider().name) + " is in front of me")
-			
-			var inputDir_cast = $DirectionInput_rayCast
-			inputDir_cast.cast_to = Vector2(50 * facing, 0)
-			inputDir_cast.force_raycast_update()
-			if (inputDir_cast.is_colliding()):
-				print(String(inputDir_cast.get_collider().name) + " is in front of me")
+		if (can_turn_around):
+			# Lerp velocity.x towards the direction the player is pressing keys for, weighted based on if they're grounded or not.
+			velocity.x = lerp(velocity.x, move_speed * move_direction, _get_h_weight())
+			#print("velocity.x: " + String(velocity.x))
+			#print("move_speed: " + String(move_speed))
+			# Set sprite facing based on the last (movement) key pressed.
+			if (move_direction != 0):
+				$Body.scale.x = move_direction
+				
+				#countNum += 1
+				#print("_handle_move_input() was called!, " + String(countNum))
+				# mod (DirectionInput_rayCast) next 6 lines
+				facing = move_direction
+				var raycast_look_door = $RayCast_Look_Door
+				raycast_look_door.cast_to = Vector2(50 * facing, 0)
+				raycast_look_door.force_raycast_update()
+				if (raycast_look_door.is_colliding()):
+					print(String(raycast_look_door.get_collider().name) + " is in front of me")
+				
+				var inputDir_cast = $DirectionInput_rayCast
+				inputDir_cast.cast_to = Vector2(50 * facing, 0)
+				inputDir_cast.force_raycast_update()
+				if (inputDir_cast.is_colliding()):
+					print(String(inputDir_cast.get_collider().name) + " is in front of me")
 	elif (velocity.x != 0):	# era um else, not elif.
 		#var on_else = countNum
 		#var on_else_if = 0
@@ -248,16 +280,22 @@ func spawn_rock():
 		held_item = RockProjectile_PS.instance()
 		held_item_position = add_child(held_item)
 		#can_throw_hand = false
+	
+		print("On player, func spawn_rock(), player.pos: " + String(position))
 		
-		print("player.pos: " + String(position))
-
 func _throw_held_item():
+	print("on player, func _throw_held_item(), get_parent: " + String(get_parent().name))
 	var throw_pos = $Body/CharacterRig/Torso/RightArm/HeldItemPosition.position
-	#print("on PmFSM, _throw_held_item(), get_parent: " + String(get_parent().name))
 	held_item.launch(facing)
 	held_item = null
 	
 	can_throw_hand = false
+	
+	# // { Mod19mar22 2/2 to fix bug of player running without the run animation, It's running with "idle" animation
+	end_throw_anim_bool = true
+	print("__________ testing... ____________, on player_mult_FSM, _throw_held_item(), end throw animation")
+	# // }
+	
 	#print("get_parent: " + String(get_parent().name))
 	#velocity = Vector2.ZERO
 	#throwing_rock = false
@@ -281,7 +319,7 @@ func _on_CharacterRig_Donuts_throw_signal():
 		can_throw_donut = false
 
 func _on_CharacterRig_end_throw_donut_anim_signal():
-	#print("core.state: " + String(core_SM.state))
+	print("core.state: " + String(core_SM.state))
 	if (core_SM.state == 0):
 		anim_player.play("idle")
 	elif (core_SM.state == 1):

@@ -3,6 +3,7 @@ extends CanvasLayer
 func _ready():
 	print("on PauseSceen now!")
 	set_visible(false)
+	layer = 9
 
 func _input(event):
 	#print("on PauseScreen, _input() says, heyyyyyyyyy!")
