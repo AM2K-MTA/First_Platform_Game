@@ -113,9 +113,6 @@ func _state_logic(delta):
 		
 	if(Input.is_key_pressed(KEY_SHIFT)):
 		#parent.get_node("Health").take_damage(1)
-<<<<<<< HEAD
-		parent.get_node("Health").heal(1)
-=======
 #		parent.get_node("Health").heal(1)
 		
 #		print("On ", self.name, "player.pos: ", parent.position)
@@ -128,7 +125,6 @@ func _state_logic(delta):
 				parent.position = Vector2(285, 420)
 		else:
 			parent.position = Vector2(1850, 350)
->>>>>>> Attack-Implementation
 		
 		#parent.get_node("Health").energy_used(1)
 		#parent.get_node("Health").energy_recovered(1)

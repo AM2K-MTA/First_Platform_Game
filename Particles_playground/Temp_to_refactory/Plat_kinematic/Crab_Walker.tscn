@@ -9,11 +9,7 @@
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
-<<<<<<< HEAD
-[sub_resource type="Animation" id=3]
-=======
 [sub_resource type="Animation" id=2]
->>>>>>> Attack-Implementation
 length = 6.75
 loop = true
 step = 0.25
@@ -29,10 +25,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 5, 6, 5, 6, 5, 6, 7, 6, 7, 5 ]
 }
-<<<<<<< HEAD
-
-[sub_resource type="Animation" id=4]
-=======
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:rotation_degrees")
 tracks/1/interp = 1
@@ -71,7 +63,6 @@ tracks/3/keys = {
 }
 
 [sub_resource type="Animation" id=3]
->>>>>>> Attack-Implementation
 length = 1.25
 loop = true
 step = 0.25
@@ -87,31 +78,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 0 ]
 }
-<<<<<<< HEAD
-
-[sub_resource type="CapsuleShape2D" id=5]
-radius = 8.0
-height = 4.0
-
-[sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 4, 7 )
-
-[sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 5, 4 )
-
-[sub_resource type="CanvasItemMaterial" id=6]
-blend_mode = 1
-
-[sub_resource type="Gradient" id=7]
-offsets = PoolRealArray( 0.5, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 1 )
-
-[sub_resource type="GradientTexture" id=8]
-gradient = SubResource( 7 )
-width = 256
-
-[sub_resource type="ParticlesMaterial" id=9]
-=======
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:rotation_degrees")
 tracks/1/interp = 1
@@ -171,7 +137,6 @@ gradient = SubResource( 8 )
 width = 256
 
 [sub_resource type="ParticlesMaterial" id=10]
->>>>>>> Attack-Implementation
 emission_shape = 1
 emission_sphere_radius = 8.0
 flag_disable_z = true
@@ -184,14 +149,6 @@ orbit_velocity_random = 0.0
 angle_random = 1.0
 scale = 4.0
 scale_random = 1.0
-<<<<<<< HEAD
-color_ramp = SubResource( 8 )
-hue_variation = 0.05
-hue_variation_random = 0.46
-
-[node name="Crab_Walker" type="KinematicBody2D"]
-collision_layer = 0
-=======
 color_ramp = SubResource( 9 )
 hue_variation = 0.05
 hue_variation_random = 0.46
@@ -200,7 +157,6 @@ hue_variation_random = 0.46
 "Enemies",
 ]]
 collision_layer = 4
->>>>>>> Attack-Implementation
 collision_mask = 3
 script = ExtResource( 5 )
 
@@ -229,51 +185,28 @@ collision_mask = 2
 collide_with_areas = true
 
 [node name="Sprite" type="Sprite" parent="."]
-<<<<<<< HEAD
-self_modulate = Color( 1, 1, 1, 0 )
 material = SubResource( 1 )
-rotation = 3.14159
-=======
-material = SubResource( 1 )
->>>>>>> Attack-Implementation
 texture = ExtResource( 2 )
 hframes = 8
 frame = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/destroy = ExtResource( 6 )
-<<<<<<< HEAD
-anims/idle = SubResource( 3 )
-anims/walk = SubResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = -1.5708
-shape = SubResource( 5 )
-=======
 anims/idle = SubResource( 2 )
 anims/walk = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -1.5708
 shape = SubResource( 4 )
->>>>>>> Attack-Implementation
 
 [node name="HitBox_L" type="Area2D" parent="." groups=[
 "HitBox",
 ]]
-<<<<<<< HEAD
-collision_layer = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox_L"]
-position = Vector2( -13, 1 )
-shape = SubResource( 12 )
-=======
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox_L"]
 position = Vector2( -13, 1 )
 shape = SubResource( 5 )
->>>>>>> Attack-Implementation
 
 [node name="HitBox_R" type="Area2D" parent="." groups=[
 "HitBox",
@@ -283,11 +216,7 @@ collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox_R"]
 position = Vector2( -13, 1 )
-<<<<<<< HEAD
-shape = SubResource( 12 )
-=======
 shape = SubResource( 5 )
->>>>>>> Attack-Implementation
 
 [node name="HurtBox" type="Area2D" parent="."]
 position = Vector2( 0, -6 )
@@ -295,31 +224,19 @@ collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2( 0, -4 )
-<<<<<<< HEAD
-shape = SubResource( 11 )
-
-[node name="Explosion" type="Particles2D" parent="."]
-self_modulate = Color( 1, 1, 1, 0.12 )
-material = SubResource( 6 )
-=======
 shape = SubResource( 6 )
 
 [node name="Explosion" type="Particles2D" parent="."]
 self_modulate = Color( 1, 1, 1, 0.12 )
 material = SubResource( 7 )
 emitting = false
->>>>>>> Attack-Implementation
 amount = 32
 lifetime = 0.5
 one_shot = true
 speed_scale = 1.2
 explosiveness = 0.76
 draw_order = 215832976
-<<<<<<< HEAD
-process_material = SubResource( 9 )
-=======
 process_material = SubResource( 10 )
->>>>>>> Attack-Implementation
 texture = ExtResource( 4 )
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="."]

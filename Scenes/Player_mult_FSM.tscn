@@ -5,11 +5,7 @@
 [ext_resource path="res://Scripts/Core_SM_PlayerFSM.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/Action_SM_PlayerFSM.gd" type="Script" id=4]
 [ext_resource path="res://Health.tscn" type="PackedScene" id=5]
-<<<<<<< HEAD
-[ext_resource path="res://Particles_playground/Purse.tscn" type="PackedScene" id=6]
-=======
 [ext_resource path="res://GUI/Purse.tscn" type="PackedScene" id=6]
->>>>>>> Attack-Implementation
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14, 38 )

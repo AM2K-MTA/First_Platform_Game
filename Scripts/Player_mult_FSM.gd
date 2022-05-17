@@ -113,9 +113,6 @@ func _apply_movement():
 	
 	if (move_direction == 0 && abs(velocity.x) < SLOP_STOP_THRESHOLD):
 		velocity.x = 0
-<<<<<<< HEAD
-		
-=======
 	
 	# // { Mod19mar22 1/2 to fix bug of player running without the run animation, It's running with "idle" animation
 	# Make player stop moving to throw a object
@@ -126,7 +123,6 @@ func _apply_movement():
 	# // }
 #	print("can_throw_hand: " + str(can_throw_hand))
 	
->>>>>>> Attack-Implementation
 	var stop_on_slop = true if get_floor_velocity().x == 0 else false
 	
 	velocity = move_and_slide_with_snap(velocity, snap, UP, stop_on_slop)
@@ -150,11 +146,8 @@ func _handle_move_input():
 		#print(-int(Input.is_action_pressed("ui_right")))
 		# "Input.get_action_strength("ui_left")" return 1 if that Key was pressed or 0 if other is pressed
 
-<<<<<<< HEAD
-=======
 		var previous_move_dir = move_direction
 		
->>>>>>> Attack-Implementation
 		#countNum += 1
 		#print("_handle_move_input() was called!, " + String(countNum))
 		# Get movement KeyPresses, converts to integers, and then store in move_direction.
