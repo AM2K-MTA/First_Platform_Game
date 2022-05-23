@@ -1,7 +1,6 @@
 extends KinematicBody2D
 
 onready var player = Globals.global_player
-onready var sprite = get_node("Sprite")
 
 var vel = Vector2(0, 0)
 
@@ -31,13 +30,8 @@ func _ready():
 	set_process(true)
 
 func set_dir(target_dir):
-	# Maybe something is wrong here...
-	# bug:There is a bug that "self" can't see player Unless he jumps;
-	#   bugTryFix: Create a signal that look for Player's direction change (if "self" see player on the left and He move to my right side, signal "turnSide_change" is emitted and some func like "turning(old_side = -1, new_side = 1)")
 	if (next_dir != target_dir):
 		next_dir = target_dir
-		if (next_dir != 0):
-			sprite.scale.x = next_dir     # modSprite: Try to turn around the "Sprite" to see when direction changes
 		next_dir_time = OS.get_ticks_msec() + react_time
 
 func sees_player():
@@ -67,20 +61,11 @@ func sees_player():
 	for eye in [eye_center, eye_top, eye_left, eye_right]:
 		for corner in [top_left, top_right, bottom_left, bottom_right]:
 			if ((corner - eye).length() > vision):
-#				print("On ", self.name, ", Player outside vision, corner: ", corner, ", eye: ", eye)
 				continue	# ignore the lines below and move foward on that for loop
-			var collision = space_state.intersect_ray(eye, corner, [self], self.collision_mask)
-			if (collision):
-				if (collision.collider.name == "Player_mult_FSM"):
-#					print("On ", self.name, ", collision with Player: ", collision.collider.name)
-					hit_pos.append(collision.position)
-					return true
-			# // { temp code, debug purpose, start
-				elif (collision.collider.get_class() == "TileMap"):		# Maybe look for current_level's child node with type 'TileMap', so if the node's name changes, the type doesn't
-					# Maybe look for a better place to find player or Change state to "Patrol"
-#					print("On ", self.name, ", collision with != Player: ", collision.collider.name, ", collision.collider.get_class(): ", collision.collider.get_class())
-					pass
-			# // } temp code, debug purpose, end
+			var collision = space_state.intersect_ray(eye, corner, [], 1)
+			if (collision and collision.collider.name == "Player_mult_FSM"):
+				hit_pos.append(collision.position)
+				return true
 	return false
 
 func _process(delta):
@@ -102,7 +87,7 @@ func _process(delta):
 			vel.y = -800
 		next_jump_time = -1
 	
-	vel.x = dir * 300		# Original code: "vel.x = dir * 500"
+	vel.x = dir * 500
 	
 	if (player.position.y < position.y - 64 and next_jump_time == -1 and sees_player()):
 		next_jump_time = OS.get_ticks_msec() + react_time
@@ -118,7 +103,6 @@ func _process(delta):
 
 func _draw():
 	if (hit_pos != null):
-#		print("On ", self.name, ", hit_pos != null: ", hit_pos, ", hit_pos is empty: ", (hit_pos as Array).empty())
 		var dist = 0.0
 		for eye in eyes_pos:
 #			print("On ", self.name, ", get eyes pos: ", eye)
@@ -127,7 +111,6 @@ func _draw():
 			if (cur_dist < (vision)):	# < 150 is OK
 				dist = cur_dist
 				laser_color = Color(0, 0, 1, 1)
-				draw_line(eye - position, player.position - position, laser_color)
 			else:
 				laser_color = Color(1, 0, 0, 1)
 			
@@ -143,5 +126,5 @@ func _draw():
 		
 		for hit in hit_pos:
 			# The raycast that work looks to be the "eye_center", is It something wrong on "sees_player()", isn't It?
-#			draw_circle((hit - position), 5, laser_color)
+			draw_circle((hit - position), 5, laser_color)
 			draw_line(Vector2(), (hit - position), laser_color)

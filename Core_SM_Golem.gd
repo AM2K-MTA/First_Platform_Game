@@ -77,6 +77,7 @@ func _enter_state(new_state, old_state):
 			
 			parent.anim_player.play("walk")
 			parent.emit_signal("grounded_updated", true)
+#			print("On ", self.name, ", enter_state func .................... state == WALKING!")
 		states.FALLING:
 			parent.anim_player.play("fall")
 		states.DYING:

@@ -1,6 +1,8 @@
 class_name Golem
 extends KinematicBody2D
 
+signal grounded_updated(is_grounded)
+
 onready var states_container = $States
 onready var core_SM = $States/Core_SM_Golem
 onready var action_SM = $States/Action_SM_Golem
