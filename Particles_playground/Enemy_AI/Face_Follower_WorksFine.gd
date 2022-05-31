@@ -19,7 +19,7 @@ var next_jump_time = -1
 var target_player_dist = 128
 
 var eye_reach = 90
-const VISION : int = 10 * Globals.UNIT_SIZE # original code is 600, but I want that the vision can see player if he is at least 10 tiles far away from "self"
+const vision : int = 10 * Globals.UNIT_SIZE # original code is 600, but I want that the vision can see player if he is at least 10 tiles far away from "self"
 
 var vis_color = Color(.867, .91, .247, 0.1)
 var laser_color = Color(1.0, .329, .298)
@@ -27,12 +27,6 @@ var hit_pos
 var eyes_pos
 
 var debug_count = 0
-
-var target_extents_pos
-
-var Vision_green_player_outside_VISION_canPatrol : bool = true
-var Vision_yellow_player_inside_VISION_obstacleBlocking : bool = false
-var Vision_red_player_inside_VISION_canAttack : bool = false
 
 func _ready():
 	set_process(true)
@@ -61,48 +55,32 @@ func sees_player():
 	eyes_pos.append(eye_left)
 	eyes_pos.append(eye_right)
 	
-	# // { modFixPlayerExtentsPosition Start
-	target_extents_pos = []
-	# target_extents (player collision shape's extents (the line below) will return Vector2(18, 38) in that case)
-	var target_extents = player.get_node("HurtBox/CollisionShape2D").shape.extents
-	# The node "player.get_node("HurtBox")" has a different position from his parent player ("Player_mult_FSM.tscn"), IF player.position is Vector2(x, y) && his child ("HurtBox") position is the same as Vector(player.position.x, player.position.y - 8)
-	var target_extents_offset = player.get_node("HurtBox").position		# Vector(0, -8)
-	var player_POS = player.position + target_extents_offset
-
-	target_extents = target_extents / 2
-	var nw = player_POS - target_extents
-	var se = player_POS + target_extents
-	var ne = player_POS + Vector2(target_extents.x, -target_extents.y)
-	var sw = player_POS + Vector2(-target_extents.x, target_extents.y)
-
-	for pos in [player_POS, nw, ne, se, sw]:
-		target_extents_pos.append(pos)
-#	print("target_extents_pos: ", target_extents_pos)
-	# // } modFixPlayerExtentsPosition Ends
+	var player_pos = player.get_global_position()
+	var player_extents = player.get_node("HurtBox/CollisionShape2D").shape.extents - Vector2(1, 1)
+	
+	var top_left = player_pos + Vector2(-player_extents.x, -player_extents.y)
+	var top_right = player_pos + Vector2(player_extents.x, -player_extents.y)
+	var bottom_left = player_pos + Vector2(-player_extents.x, player_extents.y)
+	var bottom_right = player_pos + Vector2(player_extents.x, player_extents.y)
 	
 	var space_state = get_world_2d().direct_space_state
 	
 	for eye in [eye_center, eye_top, eye_left, eye_right]:
-		for corner in [nw, ne, se, sw]:
-			if ((corner - eye).length() > VISION):
-		#		print("On ", self.name, ", Player outside vision, corner: ", corner, ", eye: ", eye)
+		for corner in [top_left, top_right, bottom_left, bottom_right]:
+			if ((corner - eye).length() > vision):
+#				print("On ", self.name, ", Player outside vision, corner: ", corner, ", eye: ", eye)
 				continue	# ignore the lines below and move foward on that for loop
 			var collision = space_state.intersect_ray(eye, corner, [self], self.collision_mask)
 			if (collision):
 				if (collision.collider.name == "Player_mult_FSM"):
 #					print("On ", self.name, ", collision with Player: ", collision.collider.name)
 					hit_pos.append(collision.position)
-					Vision_green_player_outside_VISION_canPatrol = false
-					Vision_yellow_player_inside_VISION_obstacleBlocking = false
-					Vision_red_player_inside_VISION_canAttack = true
 					return true
 			# // { temp code, debug purpose, start
 				elif (collision.collider.get_class() == "TileMap"):		# Maybe look for current_level's child node with type 'TileMap', so if the node's name changes, the type doesn't
 					# Maybe look for a better place to find player or Change state to "Patrol"
 #					print("On ", self.name, ", collision with != Player: ", collision.collider.name, ", collision.collider.get_class(): ", collision.collider.get_class())
-					Vision_green_player_outside_VISION_canPatrol = false
-					Vision_yellow_player_inside_VISION_obstacleBlocking = true
-					Vision_red_player_inside_VISION_canAttack = false
+					pass
 			# // } temp code, debug purpose, end
 	return false
 
@@ -144,29 +122,18 @@ func _draw():
 #		print("On ", self.name, ", hit_pos != null: ", hit_pos, ", hit_pos is empty: ", (hit_pos as Array).empty())
 		var dist = 0.0
 		for eye in eyes_pos:
-#			for corner in target_extents_pos:	# Take player's collisions extents position to use on "cur_dist" variable below
 #			print("On ", self.name, ", get eyes pos: ", eye)
 			var cur_dist = (eye - position).distance_to(player.position - position)
 			
-			if (cur_dist < (VISION)):	# < 150 is OK
+			if (cur_dist < (vision)):	# < 150 is OK
 				dist = cur_dist
-				
-				if (Vision_yellow_player_inside_VISION_obstacleBlocking):
-					laser_color = Color(1, 1, 0, 1)
-				elif (Vision_red_player_inside_VISION_canAttack):
-					laser_color = Color(1, 0, 0, 1)
-		#		laser_color = Color(0, 0, 1, 1)
-#				draw_line(eye - position, player.position - position, laser_color)
+				laser_color = Color(0, 0, 1, 1)
+				draw_line(eye - position, player.position - position, laser_color)
 			else:
-		#		laser_color = Color(1, 0, 0, 1)
-				Vision_green_player_outside_VISION_canPatrol = true
-				Vision_yellow_player_inside_VISION_obstacleBlocking = false
-				Vision_red_player_inside_VISION_canAttack = false
-#				pass
+				laser_color = Color(1, 0, 0, 1)
 			
-			draw_circle(eye - position, 8, laser_color)		# Draw my Eyes
-			
-			draw_line(eye - position, player.position - position, laser_color)
+			draw_circle(eye - position, 8, laser_color)
+#			draw_line(eye - position, player.position - position, laser_color)
 		
 		if (Input.is_key_pressed(KEY_Z) and debug_count == 0):
 #			print("On ", self.name, ", player.pos: ", player.position, ", player.globalPos: ", player.global_position)
@@ -178,12 +145,4 @@ func _draw():
 		for hit in hit_pos:
 			# The raycast that work looks to be the "eye_center", is It something wrong on "sees_player()", isn't It?
 #			draw_circle((hit - position), 5, laser_color)
-			draw_line(Vector2(), (hit - position), Color(1, 1, 1, 1))
-			
-			# // { modFixPlayerExtentsPosition Starts
-			draw_rect(
-				Rect2((target_extents_pos[0] - position) - Vector2(18/2, 38/2), Vector2(18, 38)),
-				Color(1, 1, 0, 0.2), true)
-			for dot in target_extents_pos:
-				draw_circle(dot - position, 4, Color(1, 0, 0, 1))
-			# // } modFixPlayerExtentsPosition Ends
+			draw_line(Vector2(), (hit - position), laser_color)
