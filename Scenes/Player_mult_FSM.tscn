@@ -107,8 +107,10 @@ collide_with_bodies = false
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -10, -45, 20, 75 )
 
-[node name="HurtBox" type="Area2D" parent="."]
+[node name="HurtBox" type="Area2D" parent="." groups=["group_hurtbox"]]
 position = Vector2( 0, -8 )
+collision_layer = 256
+collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource( 2 )

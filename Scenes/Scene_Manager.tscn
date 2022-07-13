@@ -84,7 +84,7 @@ rect_scale = Vector2( 0.6, 0.5 )
 
 [node name="Pause_Screen" parent="Interface" instance=ExtResource( 5 )]
 
-[node name="Player_mult_FSM" parent="." instance=ExtResource( 1 )]
+[node name="Player_mult_FSM" parent="." groups=["Player"] instance=ExtResource( 1 )]
 position = Vector2( 45, 240 )
 scale = Vector2( 0.5, 0.5 )
 

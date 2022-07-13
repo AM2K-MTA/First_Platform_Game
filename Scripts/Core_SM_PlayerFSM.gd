@@ -97,11 +97,12 @@ func _state_logic(delta):
 	
 	if (Input.is_action_just_pressed("ui_temp_debug")):		# Key = "K", Just for "testing obj" purpose, go to the end of tilemap
 		#print("on Core, temp teleport when ui_select is just pressed!!!!!")
-		#parent.position = Vector2(2204, 200)
+		parent.position = Vector2(330, 50)
 		#print("on Core, to temp debug, player.pos: " + String(parent.position))
 		#get_tree().current_scene.gui.set_position(Vector2(20, 30))
 		#get_tree().current_scene.gui.set_position(Vector2(20, 30))
 		parent.get_node("Health").take_damage(10)
+#		print("On ", self.name, ", get player pos: ", parent.global_position)
 		#parent.get_node("Health").heal(10)
 		
 		#parent.get_node("Health").energy_used(10)

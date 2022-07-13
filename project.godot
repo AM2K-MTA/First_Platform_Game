@@ -180,6 +180,7 @@ Simple_ACTION={
 2d_physics/layer_7="Door"
 2d_physics/layer_8="Drop_Thru_Body"
 2d_physics/layer_9="DamageBox"
+2d_physics/layer_13="Pet"
 
 [physics]
 

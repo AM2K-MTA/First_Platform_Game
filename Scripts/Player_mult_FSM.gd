@@ -321,7 +321,7 @@ func _on_CharacterRig_end_throw_donut_anim_signal():
 		anim_player.play("death_forward")
 
 func _on_VisibilityNotifier2D_viewport_exited(viewport):
-	print("on player, visibility notifier, ATTENTION.......... VIEWPORT_EXITED signal was called! Where is the player?????????")
+	print("on player, visibility notifier, ATTENTION.......... VIEWPORT_EXITED signal was called! Where is the player?????????... viewport: ", (viewport as Viewport).get_visible_rect(), "\nFIX THAT shit above, PLEASE!!!\n")
 	#var getPos = String(position.x) + ", " + String(position.y)
 	#print("on player, visibility notifier, viewport_exited, player position: " + getPos)
 	#position = Vector2(2204, 200)
@@ -330,11 +330,15 @@ func _on_VisibilityNotifier2D_viewport_exited(viewport):
 # // { mod Crab_Walker
 func _on_HurtBox_area_entered(area):
 	if (area.is_in_group("HitBox")):
+		print("On ", self.name, ", func hurtBox area entered, bool \"area on hitbox group\" is true.")
 		var knock_side = knockback * -move_direction
-		if (was_hitted_side != null):
+		if (was_hitted_side != null):	# ??! that should tell me each side the player was hitted (left/right or front/back), the line above doesn't do that when take the direction player is moving?!
+			# that code never happens, "was_hitted_side" is always null.
+			print("On ", self.name, ", func hurtBox area entered, bool \"was_hitted_side\" != null.")
 			knock_side = knockback * was_hitted_side
 			
 		print("On player, area_entered, hit!")
+		
 		velocity.x -= lerp(velocity.x, knock_side, 0.5)
 		velocity.y = lerp(0, -knockup, 0.6)
 		velocity = move_and_slide(velocity, UP)

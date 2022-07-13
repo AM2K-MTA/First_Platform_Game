@@ -119,7 +119,6 @@ func patrol():
 	Vision_red_player_inside_VISION_canAttack = false
 
 func _process(delta):
-#	print("On ", self.name, ", sees_player: ", sees_player())
 	update()
 	
 	# Turn around the Sprite if needed
@@ -133,14 +132,29 @@ func _process(delta):
 	if (OS.get_ticks_msec() > next_dir_time):
 		dir = next_dir
 	
+	var player_jump_max_hight = 0	# Original code is = 64
+	
 	if (OS.get_ticks_msec() > next_jump_time and next_jump_time != -1 and is_on_floor()):
-		if (player.position.y < position.y - 64 and sees_player()):
-			vel.y = jump_height		# Original code "vel.y = -800"
+		if (player.position.y < (position.y - player_jump_max_hight) and sees_player()):
+			# Check if Player is not on the floor/not grounded (jumping or falling)
+			if (!player.is_on_floor()):
+				print("On ", self.name, ", player is jumping!!!")
+			
+			# Jump JUST if player is attackable (no obstacle blocking view/raycast2D)
+			if (Vision_red_player_inside_VISION_canAttack):
+				vel.y = jump_height		# Original code "vel.y = -800"
+			elif (Vision_yellow_player_inside_VISION_obstacleBlocking):
+				# I can see the player, but I have to find a path to him and pass throw that obstacle
+#				print("On ", self.name, ", Sorry, I can see the player, but there is a obstacle!!")
+#				get_path_to_player(myPos, playerPos)	# Idea for a function that calculate a path to player
+				pass
 		next_jump_time = -1
 	
-	vel.x = dir * 300		# Original code: "vel.x = dir * 500"
+	if (Vision_red_player_inside_VISION_canAttack):		# Move JUST if there is no obstacle between me and the player
+		# Works like expected, but if some simple obstacle block my vision, I stop too! The "top_eye" should work very well, right?!!
+		vel.x = dir * 300		# Original code: "vel.x = dir * 500"
 	
-	if (player.position.y < position.y - 64 and next_jump_time == -1 and sees_player()):
+	if (player.position.y < (position.y - player_jump_max_hight) and next_jump_time == -1 and sees_player()):
 		next_jump_time = OS.get_ticks_msec() + react_time
 	
 	vel.y += grav * delta

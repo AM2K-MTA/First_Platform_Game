@@ -38,7 +38,6 @@ func _apply_movement():
 	#print("movement.x is: " + str(movement.x))
 	
 	movement.y += GRAVITY
-	
 	movement.x = -speed if moving_left else speed
 	
 	movement = move_and_slide(movement, UP)
